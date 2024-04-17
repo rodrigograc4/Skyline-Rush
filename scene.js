@@ -31,12 +31,18 @@ const scene = {
 
         const plane = createPlane(10000, 6000, -2000);
         sceneGraph.add(plane);
+        plane.speed = 10;
         plane.name = "plane";
 
         const plane2 = createPlane(10000, 6000, 8000);
         sceneGraph.add(plane2);
+        plane2.speed = 10;
         plane2.name = "plane2";
 
+        const plane3 = createPlane(10000, 6000, 18000);
+        sceneGraph.add(plane3);
+        plane3.speed = 10;
+        plane3.name = "plane3";
     }
 };
 
@@ -86,26 +92,32 @@ function computeFrame(time) {
     requestAnimationFrame(computeFrame);
 }
 
-let planeSpeed = 10; // Velocidade do plano
-
 function animatePlanes() {
     // Obtenha todos os planos na cena
     const plane = sceneElements.sceneGraph.getObjectByName("plane");
     const plane2 = sceneElements.sceneGraph.getObjectByName("plane2");
+    const plane3 = sceneElements.sceneGraph.getObjectByName("plane3");
 
-    planeSpeed += 0.04;
-    plane.position.x -= planeSpeed;
-    plane2.position.x -= planeSpeed;
+    plane.speed += 0.1;
+    plane2.speed += 0.1;
+    plane3.speed += 0.1;
 
-     
-    if (plane.position.x + 10000 <= 8000) {
-        const newPlane = plane.clone();
-        newPlane.position.x = 8000;
-        sceneElements.sceneGraph.add(newPlane);
+    // Mova os planos
+    plane.position.x -= plane.speed;
+    plane2.position.x -= plane2.speed;
+    plane3.position.x -= plane3.speed;
+
+    // Se um plano sair da tela, coloque-o de volta no final
+    if (plane.position.x < -12000) {
+        plane.position.x = -2000;
     }
-    if (plane.position.x <= -12000) {
-        sceneElements.sceneGraph.remove(plane);
+    if (plane2.position.x < -12000) {
+        plane2.position.x = -2000;
     }
+    if (plane3.position.x < -12000) {
+        plane3.position.x = -2000;
+    }
+
 
     // Chame a próxima animação de quadro
     requestAnimationFrame(animatePlanes);

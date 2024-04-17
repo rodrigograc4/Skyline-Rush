@@ -158,7 +158,7 @@ function createPlane(l, w, startX) {
   // Abandoned House
   // ************************** //
 
-  const abandonedHouse = createAbandonedHouse(-startX + 3400, 1400);
+  const abandonedHouse = createAbandonedHouse(startX + 4000 + 3400, 1400);
   g.add(abandonedHouse);
 
 
@@ -166,40 +166,40 @@ function createPlane(l, w, startX) {
   // Beach Chair
   // ************************** //
 
-  const beachChair = createBeachChair(-startX + 1000, -1300);  
+  const beachChair = createBeachChair(startX + 4000 + 1000, -1300);  
   g.add(beachChair);
 
-  const beachChair2 = createBeachChair(-startX - 3500, -1400);
+  const beachChair2 = createBeachChair(startX + 4000 - 3500, -1400);
   g.add(beachChair2);
 
   // ************************** //
   // Beach Umbrella   
   // ************************** //
 
-  const beachUmbrella = createBeachUmbrella(-startX - 1000, -1300);
+  const beachUmbrella = createBeachUmbrella(startX + 4000 - 1000, -1300);
   g.add(beachUmbrella);
 
-  const beachUmbrella2 = createBeachUmbrella(-startX + 4000, -1000);
+  const beachUmbrella2 = createBeachUmbrella(startX + 4000 + 4000, -1000);
   g.add(beachUmbrella2);
 
   // ************************** //
   // Beach Ball
   // ************************** //
 
-  const beachBall = createBeachBall(-startX - 1300, -1500);
+  const beachBall = createBeachBall(startX + 4000 - 1300, -1500);
   g.add(beachBall);
 
   // ************************** //
   // Palm Tree
   // ************************** //
 
-  const palmTree = createPalmTree(-startX - 2500, -900);
+  const palmTree = createPalmTree(startX + 4000 - 2500, -900);
   g.add(palmTree);
 
-  const palmTree2 = createPalmTree(-startX + 2200, -800);
+  const palmTree2 = createPalmTree(startX + 4000 + 2200, -800);
   g.add(palmTree2);
 
-  const palmTree3 = createPalmTree(-startX + 2600, -1100);
+  const palmTree3 = createPalmTree(startX + 4000 + 2600, -1100);
   g.add(palmTree3);
 
 
@@ -209,7 +209,7 @@ function createPlane(l, w, startX) {
 
   const oldRustyCar = createOldRustyCar(0, 0);
   oldRustyCar.rotateY(Math.PI / 4);
-  oldRustyCar.position.set(-startX +4400, 0, 1200);
+  oldRustyCar.position.set(startX + 4000 +4400, 0, 1200);
 
   g.add(oldRustyCar);
 
