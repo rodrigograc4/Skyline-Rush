@@ -72,7 +72,7 @@ const helper = {
         // **************************************** //
         // Add the rendered image in the HTML DOM
         // **************************************** //
-        const htmlElement = document.querySelector("#Skyline_Ride");
+        const htmlElement = document.querySelector("#Skyline_Rush");
         htmlElement.appendChild(renderer.domElement);
 
         // ************************** //
