@@ -55,6 +55,16 @@ function computeFrame(time) {
 
     var velocity;
 
+    var limite = 1
+
+    limite += limite + 0.01;
+
+    if (limite > 40) {
+        limite = 40;
+    }
+
+    var curvage = 14 + 10 * Math.log(limite);
+
     if (skyline.position.x < 10000 && skyline.position.x > -2000 && skyline.position.z < 1000 && skyline.position.z > -1000) {
         if (keyShift) { velocity = 22; } else { velocity = 14; }
     
@@ -63,11 +73,11 @@ function computeFrame(time) {
         }
         if (keyA) {
             skyline.rotation.y = Math.max(skyline.rotation.y + 0.01, -Math.PI / 6);
-            skyline.translateZ(-velocity-velocity);
+            skyline.translateZ(-curvage);
             
         } else if (keyD) {
             skyline.rotation.y = Math.min(skyline.rotation.y - 0.01, Math.PI / 6);
-            skyline.translateZ(velocity+velocity);
+            skyline.translateZ(curvage);
 
         } else {
 
@@ -98,9 +108,9 @@ function animatePlanes() {
     const plane2 = sceneElements.sceneGraph.getObjectByName("plane2");
     const plane3 = sceneElements.sceneGraph.getObjectByName("plane3");
 
-    plane.speed += 0.1;
-    plane2.speed += 0.1;
-    plane3.speed += 0.1;
+    plane.speed += 0.02;
+    plane2.speed += 0.02;
+    plane3.speed += 0.02;
 
     // Mova os planos
     plane.position.x -= plane.speed;

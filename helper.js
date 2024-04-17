@@ -9,8 +9,8 @@ const helper = {
         // Create the 3D scene
         // ************************** //
         sceneElements.sceneGraph = new THREE.Scene();
-        //sceneElements.sceneGraph.background = new THREE.Color(0x47bcff)
-        sceneElements.sceneGraph.fog = new THREE.Fog(0xffe680, 2500, 12000)
+        sceneElements.sceneGraph.background = new THREE.Color(0xFFAA66)
+        sceneElements.sceneGraph.fog = new THREE.Fog(0xFFAA66, 1, 11000)
 
         // ************************** //
         // Add camera
