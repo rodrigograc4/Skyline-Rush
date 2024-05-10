@@ -87,11 +87,11 @@ function computeFrame() {
 
     var limite = 1
 
-    limite += limite + 0.005;
+    limite += limite + 0.05;
 
-    if (limite > 80) {
-        limite = 80;
-    }
+    // if (limite > 80) {
+    //     limite = 80;
+    // }
 
     var curvage = 14 + 10 * Math.log(limite);
 

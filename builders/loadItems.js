@@ -422,3 +422,131 @@ function createSuburbanHouse(posx, posz) {
     );
     return group;
 }
+
+
+// ************************** //
+// Load Car
+// ************************** //
+
+function createCar(posx, posz) {
+    const group = new THREE.Group();
+
+    // Instantiate a loader
+    const loader = new GLTFLoader();
+
+    // Load a glTF resource
+    loader.load(
+        // resource URL
+        'models/cars/low_poly_car/scene.gltf',
+        // called when the resource is loaded
+        function ( gltf ) {
+            gltf.scene.scale.set(0.45,0.45,0.45)
+            gltf.scene.rotation.y = -Math.PI/2
+            gltf.scene.position.set(posx, 0, posz)
+
+            gltf.scene.traverse(function (child) {
+
+                if (child instanceof THREE.Mesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                }
+            });
+
+            group.add( gltf.scene );
+        },
+        // called while loading is progressing
+        function ( xhr ) {
+            console.log( 'Car ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        },
+        // called when loading has errors
+            function ( error ) {
+        console.log( ' An error happened' +  error );
+        }
+    );
+    return group;
+}
+
+
+// ************************** //
+// Load Car2
+// ************************** //
+
+function createCar2(posx, posz) {
+    const group = new THREE.Group();
+
+    // Instantiate a loader
+    const loader = new GLTFLoader();
+
+    // Load a glTF resource
+    loader.load(
+        // resource URL
+        'models/cars/low_poly_car2/scene.gltf',
+        // called when the resource is loaded
+        function ( gltf ) {
+            gltf.scene.scale.set(2.3,2.3,2.3)
+            gltf.scene.rotation.y = Math.PI
+            gltf.scene.position.set(posx, 0, posz)
+
+            gltf.scene.traverse(function (child) {
+
+                if (child instanceof THREE.Mesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                }
+            });
+
+            group.add( gltf.scene );
+        },
+        // called while loading is progressing
+        function ( xhr ) {
+            console.log( 'Car2 ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        },
+        // called when loading has errors
+            function ( error ) {
+        console.log( ' An error happened' +  error );
+        }
+    );
+    return group;
+}
+
+// ************************** //
+// Load CarMercedes
+// ************************** //
+
+function createCarMercedes(posx, posz) {
+    const group = new THREE.Group();
+
+    // Instantiate a loader
+    const loader = new GLTFLoader();
+
+    // Load a glTF resource
+    loader.load(
+        // resource URL
+        'models/cars/mercedes-benz_500sel_w126_lowpoly_for_3dprinting/scene.gltf',
+        // called when the resource is loaded
+        function ( gltf ) {
+            gltf.scene.scale.set(0.1,0.1,0.1)
+            gltf.scene.rotation.y = Math.PI
+            gltf.scene.position.set(posx, 0, posz)
+
+            gltf.scene.traverse(function (child) {
+
+                if (child instanceof THREE.Mesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                }
+            });
+
+            group.add( gltf.scene );
+        },
+        // called while loading is progressing
+        function ( xhr ) {
+            console.log( 'CarMercedes ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        },
+        // called when loading has errors
+            function ( error ) {
+        console.log( ' An error happened' +  error );
+        }
+    );
+    return group;
+}
