@@ -10,7 +10,7 @@ const helper = {
         // ************************** //
         sceneElements.sceneGraph = new THREE.Scene();
         sceneElements.sceneGraph.background = new THREE.Color(0xFFAA66)
-        sceneElements.sceneGraph.fog = new THREE.Fog(0xFFAA66, 1, 11000)
+        //sceneElements.sceneGraph.fog = new THREE.Fog(0xFFAA66, 1, 11000)
 
         // ************************** //
         // Add camera
@@ -19,7 +19,7 @@ const helper = {
         const height = window.innerHeight;
         const camera = new THREE.PerspectiveCamera(45, width / height, 10, 10000);
         sceneElements.camera = camera;
-        camera.position.set(-2000, 1000, 0);
+        camera.position.set(-2000, 1100, 0);
         camera.lookAt(0, 0, 0);
 
         // ************************** //
@@ -35,24 +35,34 @@ const helper = {
         // ***************************** //
         // Add spotlight (with shadows)
         // ***************************** //
-        const sunLight = new THREE.DirectionalLight(0xffffff, 1.5);
-        sunLight.position.set(0, 2800, 0);
+        const sunLight = new THREE.SpotLight(0xffffff);
+        sunLight.position.set(0, 5000, 0);
+        sunLight.intensity = 1.5;
+        sunLight.decay = 0;
+        sunLight.penumbra = 1;
+        sunLight.distance = 10000;
+
         sceneElements.sceneGraph.add(sunLight);
 
         sunLight.castShadow = true;
-        sunLight.shadow.mapSize.width = 2048;
-        sunLight.shadow.mapSize.height = 2048;
-
+        sunLight.shadow.mapSize.width = 3072;
+        sunLight.shadow.mapSize.height = 2048;// For sunLight
+        
+        
         sunLight.name = "sunLight";
 
 
-        const moonLight = new THREE.DirectionalLight(0xffffff, 0.05);
-        moonLight.position.set(0, -2400, 0);
+        const moonLight = new THREE.SpotLight(0xffffff);
+        moonLight.position.set(0, -5000, 0);
+        moonLight.intensity = 0;
+        moonLight.decay = 0;
+        moonLight.penumbra = 1;
+        moonLight.distance = 10000;
         sceneElements.sceneGraph.add(moonLight);
 
         moonLight.castShadow = true;
-        moonLight.shadow.mapSize.width = 2048;
-        moonLight.shadow.mapSize.height = 2048;
+        moonLight.shadow.mapSize.width = 3072;
+        moonLight.shadow.mapSize.height = 2048;// For moonLight
 
         moonLight.name = "moonLight";
 
@@ -82,21 +92,11 @@ const helper = {
         sceneElements.control.screenSpacePanning = true;
 
         // ************************** //
-        // Enable shadows
+        // NEW --- Interaction setup
         // ************************** //
-        sceneElements.sceneGraph.castShadow = true;
-        sceneElements.sceneGraph.receiveShadow = true;
-
     },
 
     render: function (sceneElements) {
-
-        const SunLight = sceneElements.sceneGraph.getObjectByName("sunLight");
-        const MoonLight = sceneElements.sceneGraph.getObjectByName("moonLight");
-        SunLight.rotation.x -= 0.005;
-        MoonLight.rotation.x -= 0.005;
-
-
         sceneElements.renderer.render(sceneElements.sceneGraph, sceneElements.camera);
     },
 };

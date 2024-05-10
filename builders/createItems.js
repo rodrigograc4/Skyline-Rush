@@ -128,19 +128,19 @@ function createPlane(l, w, startX) {
   g.add(grassPlaneRight);
 
 
-  // ************************** //
-  // Fenders
-  // ************************** //
+  // // ************************** //
+  // // Fenders
+  // // ************************** //
 
-  const fenceSpacing = 178;
-  for (let i = 0; i < l / fenceSpacing; i++) {
-    g.add(createHighwayFence(startX + i * fenceSpacing, (tarWidth+100) / 2));
+  // const fenceSpacing = 178;
+  // for (let i = 0; i < l / fenceSpacing; i++) {
+  //   g.add(createHighwayFence(startX + i * fenceSpacing, (tarWidth+100) / 2));
 
-    fence2 = createHighwayFence(0, 0);
-    fence2.rotateY(Math.PI);
-    fence2.position.set(startX + i * fenceSpacing, 0, -(tarWidth+100) / 2);
-    g.add(fence2);
-  }
+  //   fence2 = createHighwayFence(0, 0);
+  //   fence2.rotateY(Math.PI);
+  //   fence2.position.set(startX + i * fenceSpacing, 0, -(tarWidth+100) / 2);
+  //   g.add(fence2);
+  // }
 
 
   // ************************** //
@@ -201,17 +201,6 @@ function createPlane(l, w, startX) {
 
   const palmTree3 = createPalmTree(startX + 4000 + 2600, -1100);
   g.add(palmTree3);
-
-
-  // ************************** //
-  // Old Rusty Car
-  // ************************** //
-
-  const oldRustyCar = createOldRustyCar(0, 0);
-  oldRustyCar.rotateY(Math.PI / 4);
-  oldRustyCar.position.set(startX + 4000 +4400, 0, 1200);
-
-  g.add(oldRustyCar);
 
 
 

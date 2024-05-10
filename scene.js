@@ -46,9 +46,39 @@ const scene = {
     }
 };
 
-// ANIMATION
 
-function computeFrame(time) {
+function updateSunAndMoonPosition() {
+    const sunLight = sceneElements.sceneGraph.getObjectByName("sunLight");
+    const moonLight = sceneElements.sceneGraph.getObjectByName("moonLight");
+
+    // Define o raio do círculo
+    const radius = 5000;
+
+    // Define a velocidade angular de rotação (em radianos por frame ou por segundo, dependendo da sua configuração)
+    const angularSpeed = 0.0001; // Ajuste conforme necessário
+
+    // Obtém o tempo atual (você pode precisar ajustar como obtém o tempo com base na sua configuração)
+    const time = Date.now();
+
+    // Calcula o ângulo com base no tempo
+    const angle = angularSpeed * time;
+
+    // Calcula as novas posições para sol e lua
+    const sunY = radius * Math.sin(angle); // Movimento circular no eixo Y
+    const sunZ = radius * Math.cos(angle); // Movimento circular no eixo Z
+    const moonY = -sunY; // Posição oposta ao sol no eixo Y
+    const moonZ = -sunZ; // Posição oposta ao sol no eixo Z
+
+    // Atualiza as posições dos objetos do sol e da lua
+    sunLight.position.set(2000, sunY, sunZ);
+    moonLight.position.set(2000, moonY, moonZ);
+}
+
+
+function computeFrame() {
+    
+    // Atualiza a posição do sol e da lua
+    updateSunAndMoonPosition();
 
     // Control Skyline
     const skyline = sceneElements.sceneGraph.getObjectByName("nissanSkyline");
