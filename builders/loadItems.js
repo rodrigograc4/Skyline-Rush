@@ -11,12 +11,12 @@ function createNissanSkyline(posx, posz) {
     // Load a glTF resource
     loader.load(
         // resource URL
-        'models/nissan_skyline/scene.gltf',
+        'models/low_poly_nissan_skyline_r34/scene.gltf',
         // called when the resource is loaded
         function ( gltf ) {
-            gltf.scene.scale.set(1,1,1)
-            gltf.scene.rotation.y = Math.PI/2
-            gltf.scene.position.set(posx, 6, posz)
+            gltf.scene.scale.set(75,75,75)
+            gltf.scene.rotation.y = Math.PI
+            gltf.scene.position.set(posx, 33, posz)
 
             gltf.scene.traverse(function (child) {
 
@@ -84,176 +84,6 @@ function createHighwayFence(posx, posz) {
 }
 
 // ************************** //
-// Load Building Set
-// ************************** //
-
-function createBuildingSet(posx, posz) {
-    const group = new THREE.Group();
-
-    // Instantiate a loader
-    const loader = new GLTFLoader();
-
-    // Load a glTF resource
-    loader.load(
-        // resource URL
-        'models/building_set/scene.gltf',
-        // called when the resource is loaded
-        function ( gltf ) {
-            gltf.scene.scale.set(100,100,100)
-            gltf.scene.rotation.y = Math.PI/2
-            gltf.scene.position.set(posx, 10, posz)
-
-            gltf.scene.traverse(function (child) {
-
-                if (child instanceof THREE.Mesh) {
-                child.castShadow = true;
-                child.receiveShadow = true;
-                }
-            });
-
-            group.add( gltf.scene );
-        },
-        // called while loading is progressing
-        function ( xhr ) {
-            console.log( 'Building Set ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-        },
-        // called when loading has errors
-            function ( error ) {
-        console.log( ' An error happened' +  error );
-        }
-    );
-    return group;
-}
-
-
-// ************************** //
-// Load Abandoned House
-// ************************** //
-
-function createAbandonedHouse(posx, posz) {
-    const group = new THREE.Group();
-
-    // Instantiate a loader
-    const loader = new GLTFLoader();
-
-    // Load a glTF resource
-    loader.load(
-        // resource URL
-        'models/abandoned_house/scene.gltf',
-        // called when the resource is loaded
-        function ( gltf ) {
-            gltf.scene.scale.set(100,100,100)
-            gltf.scene.rotation.y = Math.PI/2
-            gltf.scene.position.set(posx, 0, posz)
-
-            gltf.scene.traverse(function (child) {
-
-                if (child instanceof THREE.Mesh) {
-                child.castShadow = true;
-                child.receiveShadow = true;
-                }
-            });
-
-            group.add( gltf.scene );
-        },
-        // called while loading is progressing
-        function ( xhr ) {
-            console.log( 'Abandoned House ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-        },
-        // called when loading has errors
-            function ( error ) {
-        console.log( ' An error happened' +  error );
-        }
-    );
-    return group;
-}
-
-// ************************** //
-// Load Beach Chair
-// ************************** //
-
-function createBeachChair(posx, posz) {
-    const group = new THREE.Group();
-
-    // Instantiate a loader
-    const loader = new GLTFLoader();
-
-    // Load a glTF resource
-    loader.load(
-        // resource URL
-        'models/beach_chair/scene.gltf',
-        // called when the resource is loaded
-        function ( gltf ) {
-            gltf.scene.scale.set(100,100,100)
-            gltf.scene.rotation.y = Math.PI/2
-            gltf.scene.position.set(posx, 0, posz)
-
-            gltf.scene.traverse(function (child) {
-
-                if (child instanceof THREE.Mesh) {
-                child.castShadow = true;
-                child.receiveShadow = true;
-                }
-            });
-
-            group.add( gltf.scene );
-        },
-        // called while loading is progressing
-        function ( xhr ) {
-            console.log( 'Beach Chair ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-        },
-        // called when loading has errors
-            function ( error ) {
-        console.log( ' An error happened' +  error );
-        }
-    );
-    return group;
-}
-
-
-// ************************** //
-// Load Beach Umbrella
-// ************************** //
-
-function createBeachUmbrella(posx, posz) {
-    const group = new THREE.Group();
-
-    // Instantiate a loader
-    const loader = new GLTFLoader();
-
-    // Load a glTF resource
-    loader.load(
-        // resource URL
-        'models/beach_umbrella/scene.gltf',
-        // called when the resource is loaded
-        function ( gltf ) {
-            gltf.scene.scale.set(0.7,0.7,0.7)
-            gltf.scene.rotation.y = Math.PI/2
-            gltf.scene.position.set(posx, 0, posz)
-
-            gltf.scene.traverse(function (child) {
-
-                if (child instanceof THREE.Mesh) {
-                child.castShadow = true;
-                child.receiveShadow = true;
-                }
-            });
-
-            group.add( gltf.scene );
-        },
-        // called while loading is progressing
-        function ( xhr ) {
-            console.log( 'Beach Umbrella ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-        },
-        // called when loading has errors
-            function ( error ) {
-        console.log( ' An error happened' +  error );
-        }
-    );
-    return group;
-}
-
-// ************************** //
 // Load Beach Ball
 // ************************** //
 
@@ -266,12 +96,11 @@ function createBeachBall(posx, posz) {
     // Load a glTF resource
     loader.load(
         // resource URL
-        'models/beach_ball/scene.gltf',
+        'models/beach_ball_-_low_poly/scene.gltf',
         // called when the resource is loaded
         function ( gltf ) {
-            gltf.scene.scale.set(30,30,30)
-            gltf.scene.rotation.y = Math.PI/2
-            gltf.scene.position.set(posx, 30, posz)
+            gltf.scene.scale.set(150,150,150)
+            gltf.scene.position.set(posx,30, posz)
 
             gltf.scene.traverse(function (child) {
 
@@ -295,6 +124,7 @@ function createBeachBall(posx, posz) {
     return group;
 }
 
+
 // ************************** //
 // Load Palm Tree
 // ************************** //
@@ -308,11 +138,10 @@ function createPalmTree(posx, posz) {
     // Load a glTF resource
     loader.load(
         // resource URL
-        'models/palm_tree/scene.gltf',
+        'models/low_poly_palm/scene.gltf',
         // called when the resource is loaded
         function ( gltf ) {
-            gltf.scene.scale.set(50,50,50)
-            gltf.scene.rotation.y = Math.PI/2
+            gltf.scene.scale.set(100,100,100)
             gltf.scene.position.set(posx, 0, posz)
 
             gltf.scene.traverse(function (child) {
@@ -339,10 +168,10 @@ function createPalmTree(posx, posz) {
 
 
 // ************************** //
-// Load Old Rusty Car   
+// Load House
 // ************************** //
 
-function createOldRustyCar(posx, posz) {
+function createHouse(posx, posz) {
     const group = new THREE.Group();
 
     // Instantiate a loader
@@ -351,12 +180,12 @@ function createOldRustyCar(posx, posz) {
     // Load a glTF resource
     loader.load(
         // resource URL
-        'models/old_rusty_car/scene.gltf',
+        'models/low_poly_house/scene.gltf',
         // called when the resource is loaded
         function ( gltf ) {
-            gltf.scene.scale.set(1,1,1)
-            gltf.scene.rotation.y = Math.PI/2
-            gltf.scene.position.set(posx, 30, posz)
+            gltf.scene.scale.set(300,300,300)
+            gltf.scene.rotation.y = Math.PI
+            gltf.scene.position.set(posx, -10, posz)
 
             gltf.scene.traverse(function (child) {
 
@@ -370,7 +199,221 @@ function createOldRustyCar(posx, posz) {
         },
         // called while loading is progressing
         function ( xhr ) {
-            console.log( 'Old Rusty Car ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+            console.log( 'House ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        },
+        // called when loading has errors
+            function ( error ) {
+        console.log( ' An error happened' +  error );
+        }
+    );
+    return group;
+}
+
+
+
+// ************************** //
+// Load Beach Umbrella
+// ************************** //
+
+function createBeachUmbrella(posx, posz) {
+    const group = new THREE.Group();
+
+    // Instantiate a loader
+    const loader = new GLTFLoader();
+
+    // Load a glTF resource
+    loader.load(
+        // resource URL
+        'models/parasol_lowpoly_-_beach_umbrella/scene.gltf',
+        // called when the resource is loaded
+        function ( gltf ) {
+            gltf.scene.scale.set(50,50,50)
+            gltf.scene.position.set(posx, -10, posz)
+
+            gltf.scene.traverse(function (child) {
+
+                if (child instanceof THREE.Mesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                }
+            });
+
+            group.add( gltf.scene );
+        },
+        // called while loading is progressing
+        function ( xhr ) {
+            console.log( 'Beach Umbrella ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        },
+        // called when loading has errors
+            function ( error ) {
+        console.log( ' An error happened' +  error );
+        }
+    );
+    return group;
+}
+
+
+// ************************** //
+// Load Ice Cream Car
+// ************************** //
+
+function createIceCreamCar(posx, posz) {
+    const group = new THREE.Group();
+
+    // Instantiate a loader
+    const loader = new GLTFLoader();
+
+    // Load a glTF resource
+    loader.load(
+        // resource URL
+        'models/stylized_toon_ice_cream_hand_car/scene.gltf',
+        // called when the resource is loaded
+        function ( gltf ) {
+            gltf.scene.scale.set(70,70,70)
+            gltf.scene.rotation.y = Math.PI/2
+            gltf.scene.position.set(posx, 40, posz)
+
+            gltf.scene.traverse(function (child) {
+
+                if (child instanceof THREE.Mesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                }
+            });
+
+            group.add( gltf.scene );
+        },
+        // called while loading is progressing
+        function ( xhr ) {
+            console.log( 'Ice Cream Car ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        },
+        // called when loading has errors
+            function ( error ) {
+        console.log( ' An error happened' +  error );
+        }
+    );
+    return group;
+}
+
+// ************************** //
+// Load Buildings
+// ************************** //
+
+function createBuildings(posx, posz) {
+    const group = new THREE.Group();
+
+    // Instantiate a loader
+    const loader = new GLTFLoader();
+
+    // Load a glTF resource
+    loader.load(
+        // resource URL
+        'models/set_of_4_low-poly_buildings/scene.gltf',
+        // called when the resource is loaded
+        function ( gltf ) {
+            gltf.scene.scale.set(200,200,200)
+            gltf.scene.rotation.y = Math.PI
+            gltf.scene.position.set(posx, -100, posz)
+
+            gltf.scene.traverse(function (child) {
+
+                if (child instanceof THREE.Mesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                }
+            });
+
+            group.add( gltf.scene );
+        },
+        // called while loading is progressing
+        function ( xhr ) {
+            console.log( 'Buildings ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        },
+        // called when loading has errors
+            function ( error ) {
+        console.log( ' An error happened' +  error );
+        }
+    );
+    return group;
+}
+
+
+// ************************** //
+// Load Stylized House
+// ************************** //
+
+function createStylizedHouse(posx, posz) {
+    const group = new THREE.Group();
+
+    // Instantiate a loader
+    const loader = new GLTFLoader();
+
+    // Load a glTF resource
+    loader.load(
+        // resource URL
+        'models/stylizes_low-poly_house/scene.gltf',
+        // called when the resource is loaded
+        function ( gltf ) {
+            gltf.scene.scale.set(80,80,80)
+            gltf.scene.rotation.y = Math.PI /2
+            gltf.scene.position.set(posx, 0 , posz)
+
+            gltf.scene.traverse(function (child) {
+
+                if (child instanceof THREE.Mesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                }
+            });
+
+            group.add( gltf.scene );
+        },
+        // called while loading is progressing
+        function ( xhr ) {
+            console.log( 'Stylized House ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        },
+        // called when loading has errors
+            function ( error ) {
+        console.log( ' An error happened' +  error );
+        }
+    );
+    return group;
+}
+
+
+// ************************** //
+// Load Suburban House
+// ************************** //
+
+function createSuburbanHouse(posx, posz) {
+    const group = new THREE.Group();
+
+    // Instantiate a loader
+    const loader = new GLTFLoader();
+
+    // Load a glTF resource
+    loader.load(
+        // resource URL
+        'models/suburb_house_1/scene.gltf',
+        // called when the resource is loaded
+        function ( gltf ) {
+            gltf.scene.scale.set(1100,1100,1100)
+            gltf.scene.rotation.y = -Math.PI/2
+            gltf.scene.position.set(posx, 0, posz)
+
+            gltf.scene.traverse(function (child) {
+
+                if (child instanceof THREE.Mesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                }
+            });
+
+            group.add( gltf.scene );
+        },
+        // called while loading is progressing
+        function ( xhr ) {
+            console.log( 'Suburban House ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
         },
         // called when loading has errors
             function ( error ) {

@@ -87,40 +87,62 @@ function computeFrame() {
 
     var limite = 1
 
-    limite += limite + 0.01;
+    limite += limite + 0.005;
 
-    if (limite > 40) {
-        limite = 40;
+    if (limite > 80) {
+        limite = 80;
     }
 
     var curvage = 14 + 10 * Math.log(limite);
 
-    if (skyline.position.x < 10000 && skyline.position.x > -2000 && skyline.position.z < 1000 && skyline.position.z > -1000) {
-        if (keyShift) { velocity = 22; } else { velocity = 14; }
-    
-        if (keyW) { 
+    if (keyShift) { 
+        velocity = 22; 
+    } else { 
+        velocity = 14; 
+    }
+
+    if (keyW) { 
+        if (skyline.position.x < 3000 ) { // Não mova para frente se já estiver no limite superior
             skyline.translateX(velocity);
         }
-        if (keyA) {
+    }
+    if (keyA) {
+        if (skyline.position.z > -550) { // Não mova para a esquerda se já estiver no limite esquerdo
             skyline.rotation.y = Math.max(skyline.rotation.y + 0.01, -Math.PI / 6);
             skyline.translateZ(-curvage);
-            
-        } else if (keyD) {
-            skyline.rotation.y = Math.min(skyline.rotation.y - 0.01, Math.PI / 6);
-            skyline.translateZ(curvage);
-
-        } else {
-
+        }
+        else {
             if (skyline.rotation.y > 0) {
                 skyline.rotation.y = Math.max(skyline.rotation.y - 0.01, 0);
             } else if (skyline.rotation.y < 0) {
                 skyline.rotation.y = Math.min(skyline.rotation.y + 0.01, 0);
             }
         }
-        if (keyS) {
+    } else if (keyD) {
+        if (skyline.position.z < 190) { // Não mova para a direita se já estiver no limite direito
+            skyline.rotation.y = Math.min(skyline.rotation.y - 0.01, Math.PI / 6);
+            skyline.translateZ(curvage);
+        }
+        else {
+            if (skyline.rotation.y > 0) {
+                skyline.rotation.y = Math.max(skyline.rotation.y - 0.01, 0);
+            } else if (skyline.rotation.y < 0) {
+                skyline.rotation.y = Math.min(skyline.rotation.y + 0.01, 0);
+            }
+        }
+    } else {
+        if (skyline.rotation.y > 0) {
+            skyline.rotation.y = Math.max(skyline.rotation.y - 0.01, 0);
+        } else if (skyline.rotation.y < 0) {
+            skyline.rotation.y = Math.min(skyline.rotation.y + 0.01, 0);
+        }
+    }
+    if (keyS) {
+        if (skyline.position.x > -500) { // Não mova para trás se já estiver no limite inferior
             skyline.translateX(-velocity);
         }
     }
+    
         
 
 

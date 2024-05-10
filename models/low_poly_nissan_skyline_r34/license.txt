@@ -1,0 +1,11 @@
+Model Information:
+* title:	Low Poly Nissan Skyline R34
+* source:	https://sketchfab.com/3d-models/low-poly-nissan-skyline-r34-d8b4d2165c8240c8857258229b1e5c0f
+* author:	yokatann (https://sketchfab.com/yokatann)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Low Poly Nissan Skyline R34" (https://sketchfab.com/3d-models/low-poly-nissan-skyline-r34-d8b4d2165c8240c8857258229b1e5c0f) by yokatann (https://sketchfab.com/yokatann) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

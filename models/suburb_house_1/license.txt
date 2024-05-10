@@ -1,0 +1,11 @@
+Model Information:
+* title:	Suburb House 1
+* source:	https://sketchfab.com/3d-models/suburb-house-1-fbdd97651fff4a42b7d193f1b53bb8dd
+* author:	A3D (https://sketchfab.com/akolmonen)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Suburb House 1" (https://sketchfab.com/3d-models/suburb-house-1-fbdd97651fff4a42b7d193f1b53bb8dd) by A3D (https://sketchfab.com/akolmonen) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -3,24 +3,24 @@
     {
       "bufferView": 2,
       "componentType": 5126,
-      "count": 1202,
+      "count": 1985,
       "max": [
-        0.23812684416770935,
-        0.4016987085342407,
-        2.19854736328125
+        2.0548534393310547,
+        4.281750679016113,
+        2.3614273071289063
       ],
       "min": [
-        -0.11250030994415283,
-        -0.9406726360321045,
-        -2.198528289794922
+        -2.039815902709961,
+        -1.3663639037986286e-05,
+        -2.7863149642944336
       ],
       "type": "VEC3"
     },
     {
       "bufferView": 2,
-      "byteOffset": 14424,
+      "byteOffset": 23820,
       "componentType": 5126,
-      "count": 1202,
+      "count": 1985,
       "max": [
         1.0,
         1.0,
@@ -36,53 +36,53 @@
     {
       "bufferView": 1,
       "componentType": 5126,
-      "count": 1202,
+      "count": 1985,
       "max": [
-        0.9862350821495056,
-        0.9846346378326416
+        0.982195258140564,
+        0.9744380712509155
       ],
       "min": [
-        0.005916247610002756,
-        0.006082683801651001
+        0.025542959570884705,
+        0.015620231628417969
       ],
       "type": "VEC2"
     },
     {
       "bufferView": 0,
       "componentType": 5125,
-      "count": 4044,
+      "count": 2961,
       "type": "SCALAR"
     }
   ],
   "asset": {
     "extras": {
-      "author": "Bryan Christian (https://sketchfab.com/bryanblast99)",
+      "author": "A3D (https://sketchfab.com/akolmonen)",
       "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
-      "source": "https://sketchfab.com/3d-models/highway-fence-e29f9a95d6024388b60c5d5f4f50cbd6",
-      "title": "Highway Fence"
+      "source": "https://sketchfab.com/3d-models/suburb-house-1-fbdd97651fff4a42b7d193f1b53bb8dd",
+      "title": "Suburb House 1"
     },
-    "generator": "Sketchfab-12.67.0",
+    "generator": "Sketchfab-12.68.0",
     "version": "2.0"
   },
   "bufferViews": [
     {
       "buffer": 0,
-      "byteLength": 16176,
+      "byteLength": 11844,
       "name": "floatBufferViews",
       "target": 34963
     },
     {
       "buffer": 0,
-      "byteLength": 9616,
-      "byteOffset": 16176,
+      "byteLength": 15880,
+      "byteOffset": 11844,
       "byteStride": 8,
       "name": "floatBufferViews",
       "target": 34962
     },
     {
       "buffer": 0,
-      "byteLength": 28848,
-      "byteOffset": 25792,
+      "byteLength": 47640,
+      "byteOffset": 27724,
       "byteStride": 12,
       "name": "floatBufferViews",
       "target": 34962
@@ -90,31 +90,31 @@
   ],
   "buffers": [
     {
-      "byteLength": 54640,
+      "byteLength": 75364,
       "uri": "scene.bin"
     }
   ],
   "images": [
     {
-      "uri": "textures/Material_baseColor.jpeg"
+      "uri": "textures/Suburb_House_1_baseColor.png"
     }
   ],
   "materials": [
     {
       "doubleSided": true,
-      "name": "Material",
+      "name": "Suburb_House_1",
       "pbrMetallicRoughness": {
         "baseColorTexture": {
           "index": 0
         },
-        "metallicFactor": 0.5,
-        "roughnessFactor": 0.25
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.6
       }
     }
   ],
   "meshes": [
     {
-      "name": "Object_0",
+      "name": "Suburb House 1_Suburb House 1_0",
       "primitives": [
         {
           "attributes": {
@@ -135,17 +135,17 @@
         1
       ],
       "matrix": [
-        1.0,
+        0.24641400575637817,
         0.0,
         0.0,
         0.0,
         0.0,
-        2.220446049250313e-16,
-        -1.0,
+        5.471490055616938e-17,
+        -0.24641400575637817,
         0.0,
         0.0,
-        1.0,
-        2.220446049250313e-16,
+        0.24641400575637817,
+        5.471490055616938e-17,
         0.0,
         0.0,
         0.0,
@@ -158,11 +158,35 @@
       "children": [
         2
       ],
-      "name": "root"
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "8ae54d3e6e424eaca1ae9e93ebd14e30.fbx"
     },
     {
       "children": [
         3
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        4
       ],
       "matrix": [
         1.0,
@@ -170,29 +194,23 @@
         0.0,
         0.0,
         0.0,
-        2.220446049250313e-16,
-        1.0,
+        0.9999999999934478,
+        3.6199901387511154e-06,
         0.0,
         0.0,
-        -1.0,
-        2.220446049250313e-16,
+        -3.6199901387511154e-06,
+        0.9999999999934478,
         0.0,
         0.0,
         0.0,
         0.0,
         1.0
       ],
-      "name": "GLTF_SceneRootNode"
-    },
-    {
-      "children": [
-        4
-      ],
-      "name": "Cube_0"
+      "name": "Suburb House 1"
     },
     {
       "mesh": 0,
-      "name": "Object_4"
+      "name": "Suburb House 1_Suburb House 1_0"
     }
   ],
   "samplers": [

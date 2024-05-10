@@ -128,49 +128,31 @@ function createPlane(l, w, startX) {
   g.add(grassPlaneRight);
 
 
-  // // ************************** //
-  // // Fenders
-  // // ************************** //
-
-  // const fenceSpacing = 178;
-  // for (let i = 0; i < l / fenceSpacing; i++) {
-  //   g.add(createHighwayFence(startX + i * fenceSpacing, (tarWidth+100) / 2));
-
-  //   fence2 = createHighwayFence(0, 0);
-  //   fence2.rotateY(Math.PI);
-  //   fence2.position.set(startX + i * fenceSpacing, 0, -(tarWidth+100) / 2);
-  //   g.add(fence2);
-  // }
-
-
   // ************************** //
-  // Building Set
+  // Buildings
   // ************************** //
 
-  const buildingSet = createBuildingSet(0, 0);
-  buildingSet.rotateY(Math.PI);
-  buildingSet.position.set(startX + 1000, 0, 1300);
-  g.add(buildingSet);
+  const buildings = createBuildings(0, 0);
+  buildings.position.set(startX + 1000, 0, 1300);
+  g.add(buildings);
 
   
 
   // ************************** //
-  // Abandoned House
+  // House
   // ************************** //
 
-  const abandonedHouse = createAbandonedHouse(startX + 4000 + 3400, 1400);
-  g.add(abandonedHouse);
+  const House = createHouse(startX + 4000 + 3400, 1500);
+  g.add(House);
 
 
   // ************************** //
-  // Beach Chair
+  // Suburban House
   // ************************** //
 
-  const beachChair = createBeachChair(startX + 4000 + 1000, -1300);  
-  g.add(beachChair);
+  const suburbanHouse = createSuburbanHouse(startX + 4000, 1500);
+  g.add(suburbanHouse);
 
-  const beachChair2 = createBeachChair(startX + 4000 - 3500, -1400);
-  g.add(beachChair2);
 
   // ************************** //
   // Beach Umbrella   
@@ -179,8 +161,16 @@ function createPlane(l, w, startX) {
   const beachUmbrella = createBeachUmbrella(startX + 4000 - 1000, -1300);
   g.add(beachUmbrella);
 
-  const beachUmbrella2 = createBeachUmbrella(startX + 4000 + 4000, -1000);
+  const beachUmbrella2 = createBeachUmbrella(startX + 4000 - 3500, -1400);
   g.add(beachUmbrella2);
+
+  
+  // ************************** //
+  // Ice Cream Car
+  // ************************** //
+
+  const iceCreamCar = createIceCreamCar(startX + 4000 + 5000, -1000); 
+  g.add(iceCreamCar);
 
   // ************************** //
   // Beach Ball

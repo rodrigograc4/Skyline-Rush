@@ -1,0 +1,11 @@
+Model Information:
+* title:	low poly palm
+* source:	https://sketchfab.com/3d-models/low-poly-palm-56ddd115a63f4f2db691c2f8df036613
+* author:	Philippines Tourism by Bart (https://sketchfab.com/PhilippinesTourism)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "low poly palm" (https://sketchfab.com/3d-models/low-poly-palm-56ddd115a63f4f2db691c2f8df036613) by Philippines Tourism by Bart (https://sketchfab.com/PhilippinesTourism) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
