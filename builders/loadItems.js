@@ -665,3 +665,165 @@ function createOppositeCarMercedes(posx, posz) {
     );
     return group;
 }
+
+// ************************** //
+// Load Sports Car
+// ************************** //
+
+function createSportsCar(posx, posz) {
+    const group = new THREE.Group();
+
+    // Instantiate a loader
+    const loader = new GLTFLoader();
+
+    // Load a glTF resource
+    loader.load(
+        // resource URL
+        'models/cars/ford_mustang_svt_cobra_r_2000_low_poly/scene.gltf',
+        // called when the resource is loaded
+        function ( gltf ) {
+            gltf.scene.scale.set(130,130,130)
+            gltf.scene.rotation.y = Math.PI/2
+            gltf.scene.position.set(posx, 0, posz)
+
+            gltf.scene.traverse(function (child) {
+
+                if (child instanceof THREE.Mesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                }
+            });
+
+            group.add( gltf.scene );
+        },
+        // called while loading is progressing
+        function ( xhr ) {
+            console.log( 'Sports Car ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        },
+        // called when loading has errors
+            function ( error ) {
+        console.log( ' An error happened' +  error );
+        }
+    );
+    return group;
+}
+
+
+function createOppositeSportsCar(posx, posz) {
+    const group = new THREE.Group();
+
+    // Instantiate a loader
+    const loader = new GLTFLoader();
+
+    // Load a glTF resource
+    loader.load(
+        // resource URL
+        'models/cars/ford_mustang_svt_cobra_r_2000_low_poly/scene.gltf',
+        // called when the resource is loaded
+        function ( gltf ) {
+            gltf.scene.scale.set(130,130,130)
+            gltf.scene.rotation.y = -Math.PI/2
+            gltf.scene.position.set(posx, 0, posz)
+
+            gltf.scene.traverse(function (child) {
+
+                if (child instanceof THREE.Mesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                }
+            });
+
+            group.add( gltf.scene );
+        },
+        // called while loading is progressing
+        function ( xhr ) {
+            console.log( 'Sports Car ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        },
+        // called when loading has errors
+            function ( error ) {
+        console.log( ' An error happened' +  error );
+        }
+    );
+    return group;
+}
+
+
+// ************************** //
+// Load Truck
+// ************************** //
+
+function createOppositeTruck(posx, posz) {
+    const group = new THREE.Group();
+
+    // Instantiate a loader
+    const loader = new GLTFLoader();
+
+    // Load a glTF resource
+    loader.load(
+        // resource URL
+        'models/cars/low_poly_truck/scene.gltf',
+        // called when the resource is loaded
+        function ( gltf ) {
+            gltf.scene.scale.set(60,60,60)
+            gltf.scene.rotation.y = -Math.PI/2
+            gltf.scene.position.set(posx, -20, posz)
+
+            gltf.scene.traverse(function (child) {
+
+                if (child instanceof THREE.Mesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                }
+            });
+
+            group.add( gltf.scene );
+        },
+        // called while loading is progressing
+        function ( xhr ) {
+            console.log( 'Sports Car ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        },
+        // called when loading has errors
+            function ( error ) {
+        console.log( ' An error happened' +  error );
+        }
+    );
+    return group;
+}
+
+function createTruck(posx, posz) {
+    const group = new THREE.Group();
+
+    // Instantiate a loader
+    const loader = new GLTFLoader();
+
+    // Load a glTF resource
+    loader.load(
+        // resource URL
+        'models/cars/low_poly_truck/scene.gltf',
+        // called when the resource is loaded
+        function ( gltf ) {
+            gltf.scene.scale.set(60,60,60)
+            gltf.scene.rotation.y = Math.PI/2
+            gltf.scene.position.set(posx, -20, posz)
+
+            gltf.scene.traverse(function (child) {
+
+                if (child instanceof THREE.Mesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                }
+            });
+
+            group.add( gltf.scene );
+        },
+        // called while loading is progressing
+        function ( xhr ) {
+            console.log( 'Sports Car ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        },
+        // called when loading has errors
+            function ( error ) {
+        console.log( ' An error happened' +  error );
+        }
+    );
+    return group;
+}

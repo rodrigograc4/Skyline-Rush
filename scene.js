@@ -44,61 +44,154 @@ const scene = {
         plane3.speed = 10;
         plane3.name = "plane3";
 
+
+        // ************************** //
+        // Create Cars
+        // ************************** //
+
+        // const truck = createOppositeTruck(1000, -870);
+        // sceneGraph.add(truck);
+        // truck.name = "truck";
+
+        // const truck2 = createTruck(1000, 620);
+        // sceneGraph.add(truck2);
+
     }
 };
 
-let spawnInterval = 2000; // Início com 1 segundo
-let minSpawnInterval = 100; // Limite de 0.01 segundos
+let spawnInterval = 5000; // Início com 1 segundo
+let minSpawnInterval = 1000; // Intervalo mínimo de spawn
 let line = 250; // Distância entre as linhas
 
-function spawnCars(sceneGraph) {
-    setInterval(() => {
-        // Seleciona aleatoriamente um tipo de carro
-        const randomCarIndex = Math.floor(Math.random() * 4); // Gera um número aleatório entre 0 e 3
-        let selectedCar;
+async function spawnCars(sceneGraph) {
+    // Seleciona aleatoriamente um tipo de carro
+    const randomCarIndex = Math.floor(Math.random() * 3); // Gera um número aleatório entre 0 e 3
+    let selectedCar;
 
-        switch (randomCarIndex) {
-            case 0:
-                selectedCar = createCar(9000, 130);
-                selectedCar.name = "car";
-                break;
-            case 1:
-                selectedCar = createOppositeCar(9000, -370);
-                selectedCar.name = "oppositecar";
-                break;
-            case 2: 
-                selectedCar = createCarMercedes(9000, 220);
-                selectedCar.name = "carMercedes";
-                break;
-            case 3:
-                selectedCar = createOppositeCarMercedes(9000, -470);
-                selectedCar.name = "oppositecarMercedes";
-                break;
-            default:
-                selectedCar = createCar(4000, 130); // Caso algo dê errado, escolha um carro padrão
+    switch (randomCarIndex) {
+        case 0:
+            selectedCar = createCar(9000, 130);
+            selectedCar.name = "car";
+            break;
+        case 1: 
+            selectedCar = createCarMercedes(9000, 220);
+            selectedCar.name = "carMercedes";
+            break;
+        case 2:
+            selectedCar = createSportsCar(9000, 130);
+            selectedCar.name = "sportscar";
+            break;
+        default:
+            selectedCar = createCar(9000, 130); // Caso algo dê errado, escolha um carro padrão
+            selectedCar.name = "car";
+    }
+    // Adiciona o carro selecionado à cena
+    sceneGraph.add(selectedCar);
+    if (Math.random() < 0.5) {
+        selectedCar.position.z += 0;
+        if (Math.random() < 0.2) {
+            secondCar = createTruck(9000, 620);
+            secondCar.position.z += line;
+            secondCar.name = "truck";
+            sceneGraph.add(secondCar);
         }
-        // Adiciona o carro selecionado à cena
-        sceneGraph.add(selectedCar);
-        if (Math.random() < 0.5) {
-            selectedCar.position.z += 0;
-        } else {
-            selectedCar.position.z += line;
+    } else {
+        selectedCar.position.z += line;
+        if (Math.random() < 0.2) {
+            secondCar = createTruck(9000, 620);
+            secondCar.position.z += 0
+            secondCar.name = "truck";
+            sceneGraph.add(secondCar);
         }
+    }
+    
+    await new Promise(r => setTimeout(r, spawnInterval));
+    if (spawnInterval > minSpawnInterval){
+        spawnInterval -= 500;
+    }
 
-    }, spawnInterval);
+    requestAnimationFrame(() => spawnCars(sceneGraph));
 }
 
 
-let velocityopposite = 40;
+let spawnIntervalOpposite = 2000; // Início com 1 segundo
+let minSpawnIntervalOpposite = 800; // Intervalo mínimo de spawn
+
+async function spawnOppositeCars(sceneGraph) {
+    // Seleciona aleatoriamente um tipo de carro
+    const randomCarIndex = Math.floor(Math.random() * 3); // Gera um número aleatório entre 0 e 3
+    let selectedCar;
+
+    switch (randomCarIndex) {
+        case 0:
+            selectedCar = createOppositeCar(9000, -370);
+            selectedCar.name = "oppositecar";
+            break;
+        case 1:
+            selectedCar = createOppositeCarMercedes(9000, -470);
+            selectedCar.name = "oppositecarMercedes";
+            break;
+        case 2:
+            selectedCar = createOppositeSportsCar(9000, -370);
+            selectedCar.name = "oppositesportscar";
+            break;
+        default:
+            selectedCar = createOppositeCar(9000, -370); // Caso algo dê errado, escolha um carro padrão
+            selectedCar.name = "oppositecar";
+    }
+    // Adiciona o carro selecionado à cena
+    sceneGraph.add(selectedCar);
+    if (Math.random() < 0.5) {
+        selectedCar.position.z += 0;
+        if (Math.random() < 0.1) {
+            secondCar = createOppositeTruck(9000, -870);
+            secondCar.position.z += line;
+            secondCar.name = "oppositeTruck";
+            sceneGraph.add(secondCar);
+        }
+    } else {
+        selectedCar.position.z += line;
+        if (Math.random() < 0.1) {
+            secondCar = createOppositeTruck(9000, -870);
+            secondCar.position.z += 0
+            secondCar.name = "oppositeTruck";
+            sceneGraph.add(secondCar);
+        }
+    }
+
+    await new Promise(r => setTimeout(r, spawnIntervalOpposite));
+    if (spawnIntervalOpposite > minSpawnIntervalOpposite){
+        spawnIntervalOpposite -= 60;
+    }
+
+    requestAnimationFrame(() => spawnOppositeCars(sceneGraph));
+}
+
+
+let velocityopposite = 30;
 let velocity = 10;
+let velocitytruckopposite = velocityopposite - 5;
+let velocitytruck = velocity - 5;
 
 function updateCarsPosition(sceneGraph) {
     // Remoção de carros que atingiram a posição -2000
-    const cars = sceneGraph.children.filter(child => child.name.includes('car') || child.name.includes('oppositecar') || child.name.includes('carMercedes') || child.name.includes('oppositecarMercedes'));
+    const cars = sceneGraph.children.filter(child => 
+        (child.name.includes('car') || child.name.includes('oppositecar') || 
+        child.name.includes('carMercedes') || child.name.includes('oppositecarMercedes') || 
+        child.name.includes('sportscar') || child.name.includes('oppositesportscar')));
+
+    const trucks = sceneGraph.children.filter(child =>
+        (child.name.includes('truck') || child.name.includes('oppositeTruck')));
 
     cars.forEach(car => {
         if (car.position.x < -11000) {
             sceneGraph.remove(car);
+        }
+    });
+
+    trucks.forEach(truck => {
+        if (truck.position.x < -11000) {
+            sceneGraph.remove(truck);
         }
     });
 
@@ -110,9 +203,19 @@ function updateCarsPosition(sceneGraph) {
             car.position.x -= velocity;
         }
     });
+
+    trucks.forEach(truck => {
+        if (truck.name.includes('opposite')) {
+            truck.position.x -= velocitytruckopposite;
+        } else {
+            truck.position.x -= velocitytruck;
+        }
+    });
     
-    velocityopposite += 0.02;
-    velocity += 0.005;
+    velocityopposite += 0.05;
+    velocity += 0.03;
+    velocitytruckopposite = velocityopposite - 5;
+    velocitytruck = velocity + 5;
 
 
     requestAnimationFrame(() => updateCarsPosition(sceneGraph));
@@ -179,7 +282,7 @@ function controlSkylinePosition() {
         }
     }
     if (keyA) {
-        if (skyline.position.z > -550) { // Não mova para a esquerda se já estiver no limite esquerdo
+        if (skyline.position.z > -370) { // Não mova para a esquerda se já estiver no limite esquerdo
             skyline.rotation.y = Math.max(skyline.rotation.y + 0.01, -Math.PI / 6);
             skyline.translateZ(-curvage);
         }
@@ -191,7 +294,7 @@ function controlSkylinePosition() {
             }
         }
     } else if (keyD) {
-        if (skyline.position.z < 190) { // Não mova para a direita se já estiver no limite direito
+        if (skyline.position.z < 370) { // Não mova para a direita se já estiver no limite direito
             skyline.rotation.y = Math.min(skyline.rotation.y - 0.01, Math.PI / 6);
             skyline.translateZ(curvage);
         }
@@ -239,9 +342,9 @@ function animatePlanes() {
     const plane2 = sceneElements.sceneGraph.getObjectByName("plane2");
     const plane3 = sceneElements.sceneGraph.getObjectByName("plane3");
 
-    plane.speed += 0.02;
-    plane2.speed += 0.02;
-    plane3.speed += 0.02;
+    plane.speed += 0.05;
+    plane2.speed += 0.05;
+    plane3.speed += 0.05;
 
     // Mova os planos
     plane.position.x -= plane.speed;
@@ -277,6 +380,7 @@ async function init() {
     requestAnimationFrame(computeFrame);
     await new Promise(r => setTimeout(r, 20000));
     spawnCars(sceneElements.sceneGraph);
+    spawnOppositeCars(sceneElements.sceneGraph);
     animatePlanes();
     await new Promise(r => setTimeout(r, 2000));
     updateCarsPosition(sceneElements.sceneGraph);
