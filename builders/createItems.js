@@ -194,21 +194,6 @@ function createPlane(l, w, startX) {
 
 
   // ************************** //
-  // Car
-  // ************************** //
-
-  const car = createCar(startX + 3000, -120);
-  g.add(car);
-
-  const car2 = createCar2(startX + 3000, 970);
-  g.add(car2);
-
-  const carMercedes = createCarMercedes(startX + 3000, 30);
-  g.add(carMercedes);
-
-
-
-  // ************************** //
   // Update StartX
   // ************************** //
 

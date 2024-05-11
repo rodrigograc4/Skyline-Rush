@@ -29,7 +29,7 @@ const helper = {
         // ************************** //
         // Add ambient light
         // ************************** //
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
         sceneElements.sceneGraph.add(ambientLight);
 
         // ***************************** //

@@ -19,7 +19,7 @@ const scene = {
         // Create Nissan Skyline
         // ************************** //
 
-        const nissanSkyline = createNissanSkyline(-400, 180);
+        const nissanSkyline = createNissanSkyline(-400, 0);
         sceneGraph.add(nissanSkyline);
         nissanSkyline.name = "nissanSkyline";
 
@@ -43,9 +43,80 @@ const scene = {
         sceneGraph.add(plane3);
         plane3.speed = 10;
         plane3.name = "plane3";
+
     }
 };
 
+let spawnInterval = 2000; // Início com 1 segundo
+let minSpawnInterval = 100; // Limite de 0.01 segundos
+let line = 250; // Distância entre as linhas
+
+function spawnCars(sceneGraph) {
+    setInterval(() => {
+        // Seleciona aleatoriamente um tipo de carro
+        const randomCarIndex = Math.floor(Math.random() * 4); // Gera um número aleatório entre 0 e 3
+        let selectedCar;
+
+        switch (randomCarIndex) {
+            case 0:
+                selectedCar = createCar(9000, 130);
+                selectedCar.name = "car";
+                break;
+            case 1:
+                selectedCar = createOppositeCar(9000, -370);
+                selectedCar.name = "oppositecar";
+                break;
+            case 2: 
+                selectedCar = createCarMercedes(9000, 220);
+                selectedCar.name = "carMercedes";
+                break;
+            case 3:
+                selectedCar = createOppositeCarMercedes(9000, -470);
+                selectedCar.name = "oppositecarMercedes";
+                break;
+            default:
+                selectedCar = createCar(4000, 130); // Caso algo dê errado, escolha um carro padrão
+        }
+        // Adiciona o carro selecionado à cena
+        sceneGraph.add(selectedCar);
+        if (Math.random() < 0.5) {
+            selectedCar.position.z += 0;
+        } else {
+            selectedCar.position.z += line;
+        }
+
+    }, spawnInterval);
+}
+
+
+let velocityopposite = 40;
+let velocity = 10;
+
+function updateCarsPosition(sceneGraph) {
+    // Remoção de carros que atingiram a posição -2000
+    const cars = sceneGraph.children.filter(child => child.name.includes('car') || child.name.includes('oppositecar') || child.name.includes('carMercedes') || child.name.includes('oppositecarMercedes'));
+
+    cars.forEach(car => {
+        if (car.position.x < -11000) {
+            sceneGraph.remove(car);
+        }
+    });
+
+    // Atualização da posição dos carros com opposite
+    cars.forEach(car => {
+        if (car.name.includes('opposite')) {
+            car.position.x -= velocityopposite;
+        } else {
+            car.position.x -= velocity;
+        }
+    });
+    
+    velocityopposite += 0.02;
+    velocity += 0.005;
+
+
+    requestAnimationFrame(() => updateCarsPosition(sceneGraph));
+}
 
 function updateSunAndMoonPosition() {
     const sunLight = sceneElements.sceneGraph.getObjectByName("sunLight");
@@ -72,14 +143,15 @@ function updateSunAndMoonPosition() {
     // Atualiza as posições dos objetos do sol e da lua
     sunLight.position.set(2000, sunY, sunZ);
     moonLight.position.set(2000, moonY, moonZ);
+
+    if (sunLight.position.y < 0) {
+        sunLight.intensity = 0;
+    } else {
+        sunLight.intensity = 1.5;
+    }
 }
 
-
-function computeFrame() {
-    
-    // Atualiza a posição do sol e da lua
-    updateSunAndMoonPosition();
-
+function controlSkylinePosition() {
     // Control Skyline
     const skyline = sceneElements.sceneGraph.getObjectByName("nissanSkyline");
 
@@ -143,8 +215,15 @@ function computeFrame() {
         }
     }
     
-        
+}
 
+
+function computeFrame() {
+    // Update skyline position
+    controlSkylinePosition();
+
+    // Update sun and moon position
+    updateSunAndMoonPosition();
 
     // Rendering
     helper.render(sceneElements);
@@ -197,7 +276,10 @@ async function init() {
     scene.load3DObjects(sceneElements.sceneGraph);
     requestAnimationFrame(computeFrame);
     await new Promise(r => setTimeout(r, 20000));
+    spawnCars(sceneElements.sceneGraph);
     animatePlanes();
+    await new Promise(r => setTimeout(r, 2000));
+    updateCarsPosition(sceneElements.sceneGraph);
 }
 
 // HANDLING EVENTS

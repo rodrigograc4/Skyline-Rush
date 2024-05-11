@@ -1,0 +1,11 @@
+Model Information:
+* title:	Low Poly Nissan Skyline
+* source:	https://sketchfab.com/3d-models/low-poly-nissan-skyline-869f53da945b4a6c9eef4919bebf7e30
+* author:	Clare Millar (https://sketchfab.com/clare_millar)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Low Poly Nissan Skyline" (https://sketchfab.com/3d-models/low-poly-nissan-skyline-869f53da945b4a6c9eef4919bebf7e30) by Clare Millar (https://sketchfab.com/clare_millar) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
