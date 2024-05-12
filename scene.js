@@ -19,7 +19,7 @@ const scene = {
         // Create Nissan Skyline
         // ************************** //
 
-        const nissanSkyline = createNissanSkyline(-400, 0);
+        const nissanSkyline = createNissanSkyline(-100, 0);
         sceneGraph.add(nissanSkyline);
         nissanSkyline.name = "nissanSkyline";
 
@@ -62,6 +62,7 @@ const scene = {
 let spawnInterval = 5000; // Início com 1 segundo
 let minSpawnInterval = 1000; // Intervalo mínimo de spawn
 let line = 250; // Distância entre as linhas
+let gameRunning = true;
 
 async function spawnCars(sceneGraph) {
     // Seleciona aleatoriamente um tipo de carro
@@ -110,6 +111,9 @@ async function spawnCars(sceneGraph) {
         spawnInterval -= 500;
     }
 
+    if (!gameRunning) {
+        return;
+    }
     requestAnimationFrame(() => spawnCars(sceneGraph));
 }
 
@@ -164,6 +168,9 @@ async function spawnOppositeCars(sceneGraph) {
         spawnIntervalOpposite -= 60;
     }
 
+    if (!gameRunning) {
+        return;
+    }
     requestAnimationFrame(() => spawnOppositeCars(sceneGraph));
 }
 
@@ -218,6 +225,9 @@ function updateCarsPosition(sceneGraph) {
     velocitytruck = velocity + 5;
 
 
+    if (!gameRunning) {
+        return;
+    }
     requestAnimationFrame(() => updateCarsPosition(sceneGraph));
 }
 
@@ -257,6 +267,28 @@ function updateSunAndMoonPosition() {
 function controlSkylinePosition() {
     // Control Skyline
     const skyline = sceneElements.sceneGraph.getObjectByName("nissanSkyline");
+    const skylineBoundingBox = new THREE.Box3().setFromObject(skyline);
+
+    // Check for collision with cars
+    const cars = sceneElements.sceneGraph.children.filter(child =>
+        child.name.includes('car') || child.name.includes('oppositecar') ||
+        child.name.includes('carMercedes') || child.name.includes('oppositecarMercedes') ||
+        child.name.includes('sportscar') || child.name.includes('oppositesportscar')
+    );
+
+    let isColliding = false;
+
+    cars.forEach(car => {
+        const carBoundingBox = new THREE.Box3().setFromObject(car);
+        if (skylineBoundingBox.intersectsBox(carBoundingBox)) {
+            isColliding = true;
+        }
+    });
+
+    if (isColliding) {
+        gameOver();
+        return;
+    }
 
     var velocity;
 
@@ -364,6 +396,10 @@ function animatePlanes() {
 
 
     // Chame a próxima animação de quadro
+    
+    if (!gameRunning) {
+        return;
+    }
     requestAnimationFrame(animatePlanes);
 }
 
@@ -378,12 +414,100 @@ async function init() {
     helper.initEmptyScene(sceneElements);
     scene.load3DObjects(sceneElements.sceneGraph);
     requestAnimationFrame(computeFrame);
-    await new Promise(r => setTimeout(r, 20000));
+}
+
+let intervalDuration = 1000;
+
+function startGame() {
+    gameRunning = true;
+    score = 0; // Inicializa o score antes de começar o jogo
     spawnCars(sceneElements.sceneGraph);
     spawnOppositeCars(sceneElements.sceneGraph);
     animatePlanes();
-    await new Promise(r => setTimeout(r, 2000));
     updateCarsPosition(sceneElements.sceneGraph);
+    document.getElementById('startButton').style.display = 'none';
+    document.getElementById('restartButton').style.display = 'none';
+    document.getElementById('logo').style.display = 'none';
+    document.getElementById('score').style.display = 'block';
+    document.getElementById('finalScore').style.display = 'none';
+    document.getElementById('highScore').style.display = 'none';
+    document.getElementById('gameOver').style.display = 'none';
+    scoreInterval = setInterval(() => {
+        score += 1;
+        document.getElementById('score').textContent = 'Score: ' + score;
+
+        intervalDuration -= 10;
+        clearInterval(scoreInterval);
+        scoreInterval = setInterval(updateScore, intervalDuration);
+    }, intervalDuration);
+}
+
+function updateScore() {
+    score += 1;
+    document.getElementById('score').textContent = 'Score: ' + score;
+}
+
+// Função para reiniciar o jogo
+async function restartGame() {
+    // Limpa a cena
+    cars = sceneElements.sceneGraph.children.filter(child =>
+        child.name.includes('car') || child.name.includes('oppositecar') ||
+        child.name.includes('carMercedes') || child.name.includes('oppositecarMercedes') ||
+        child.name.includes('sportscar') || child.name.includes('oppositesportscar') ||
+        child.name.includes('truck') || child.name.includes('oppositeTruck')
+    );
+
+    cars.forEach(car => {
+        sceneElements.sceneGraph.remove(car);
+    });
+
+    plane = sceneElements.sceneGraph.getObjectByName("plane");
+    plane2 = sceneElements.sceneGraph.getObjectByName("plane2");
+    plane3 = sceneElements.sceneGraph.getObjectByName("plane3");
+
+    // Reinicia os intervalos e variáveis relacionadas ao jogo
+    spawnInterval = 5000;
+    spawnIntervalOpposite = 2000;
+    velocityopposite = 30;
+    velocity = 10;
+    velocitytruckopposite = velocityopposite - 5;
+    velocitytruck = velocity - 5;
+    plane.speed = 10;
+    plane2.speed = 10;
+    plane3.speed = 10;
+
+    skyline = sceneElements.sceneGraph.getObjectByName("nissanSkyline");
+    skyline.position.x = -100;
+    skyline.position.z = 0;
+
+    document.getElementById('restartButton').style.display = 'none';
+    // Reinicia o jogo
+    startGame();
+
+    // Esconde o botão de Restart
+}
+
+// Event Listener para o botão de Start
+document.getElementById('startButton').addEventListener('click', startGame);
+
+// Event Listener para o botão de Restart
+document.getElementById('restartButton').addEventListener('click', restartGame);
+
+// Função para encerrar o jogo e exibir "Game Over"
+function gameOver() {
+    gameRunning = false;
+    clearInterval(scoreInterval);
+    document.getElementById('gameOver').style.display = 'block';
+    document.getElementById('restartButton').style.display = 'block';
+    document.getElementById('score').style.display = 'none';
+    document.getElementById('finalScore').style.display = 'block';
+    document.getElementById('finalScore').textContent = 'Final Score: ' + score; 
+    document.getElementById('score').textContent = 'Score: 0';
+    if (localStorage.getItem('highScore') === null || score > localStorage.getItem('highScore')) {
+        localStorage.setItem('highScore', score);
+    }
+    document.getElementById('highScore').textContent = 'High Score: ' + localStorage.getItem('highScore');
+    document.getElementById('highScore').style.display = 'block';
 }
 
 // HANDLING EVENTS

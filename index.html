@@ -17,7 +17,7 @@
     
     <title> Skyline Rush </title>
     <meta name="description" content="Highway Driving game with Nissan Skyline">
-    <link rel="icon" href="/icon.png" type="image/x-icon">
+    <link rel="icon" href="/images/skylinerush_icon.png" type="image/x-icon">
 
     <link rel="stylesheet" href="style.css">
 
@@ -56,9 +56,16 @@
 </head>
 
 <body>
-  
+
+    <img id="logo" src="images/skylinerush_logo.png" alt="Skyline Rush Logo" style="height: 150px;">
+    <h1 id="gameOver" class="gameOver" style="display: none;">Game Over</h1>
+    <h1 id="score" class="score" style="display: none;">Score: 0</h1>
+    <h1 id="finalScore" class="finalScore" style="display: none;">Final Score: 0</h1>
+    <h1 id="highScore" class="highScore" style="display: none;">High Score: 0</h1>
+    <button id="startButton" class="button_slide slide_right" style="z-index: 9999;">Start</button>
+    <button id="restartButton" class="button_slide2 slide_right" style="z-index: 9999; display: none;">Restart</button>
+
     <div id="Skyline_Rush"> </div>
-    
 	
 </body>
 

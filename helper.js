@@ -9,7 +9,7 @@ const helper = {
         // Create the 3D scene
         // ************************** //
         sceneElements.sceneGraph = new THREE.Scene();
-        sceneElements.sceneGraph.background = new THREE.Color(0xFFAA66)
+        sceneElements.sceneGraph.background = new THREE.Color(0x0C3A56)
         //sceneElements.sceneGraph.fog = new THREE.Fog(0xFFAA66, 1, 11000)
 
         // ************************** //
@@ -29,7 +29,7 @@ const helper = {
         // ************************** //
         // Add ambient light
         // ************************** //
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
         sceneElements.sceneGraph.add(ambientLight);
 
         // ***************************** //
@@ -85,11 +85,11 @@ const helper = {
         const htmlElement = document.querySelector("#Skyline_Rush");
         htmlElement.appendChild(renderer.domElement);
 
-        // ************************** //
-        // NEW --- Control for the camera
-        // ************************** //
-        sceneElements.control = new OrbitControls(camera, renderer.domElement);
-        sceneElements.control.screenSpacePanning = true;
+        // // ************************** //
+        // // NEW --- Control for the camera
+        // // ************************** //
+        // sceneElements.control = new OrbitControls(camera, renderer.domElement);
+        // sceneElements.control.screenSpacePanning = true;
 
         // ************************** //
         // NEW --- Interaction setup
