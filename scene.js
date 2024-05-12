@@ -273,7 +273,8 @@ function controlSkylinePosition() {
     const cars = sceneElements.sceneGraph.children.filter(child =>
         child.name.includes('car') || child.name.includes('oppositecar') ||
         child.name.includes('carMercedes') || child.name.includes('oppositecarMercedes') ||
-        child.name.includes('sportscar') || child.name.includes('oppositesportscar')
+        child.name.includes('sportscar') || child.name.includes('oppositesportscar') ||
+        child.name.includes('truck') || child.name.includes('oppositeTruck')
     );
 
     let isColliding = false;
@@ -418,9 +419,10 @@ async function init() {
 
 let intervalDuration = 1000;
 
-function startGame() {
+async function startGame() {
     gameRunning = true;
     score = 0; // Inicializa o score antes de começar o jogo
+    intervalDuration = 1000;
     spawnCars(sceneElements.sceneGraph);
     spawnOppositeCars(sceneElements.sceneGraph);
     animatePlanes();
@@ -432,19 +434,20 @@ function startGame() {
     document.getElementById('finalScore').style.display = 'none';
     document.getElementById('highScore').style.display = 'none';
     document.getElementById('gameOver').style.display = 'none';
-    scoreInterval = setInterval(() => {
-        score += 1;
-        document.getElementById('score').textContent = 'Score: ' + score;
-
-        intervalDuration -= 10;
-        clearInterval(scoreInterval);
-        scoreInterval = setInterval(updateScore, intervalDuration);
-    }, intervalDuration);
+    updateScore();
 }
 
-function updateScore() {
+async function updateScore() {
     score += 1;
     document.getElementById('score').textContent = 'Score: ' + score;
+    if (intervalDuration > 20) { 
+        intervalDuration -= 10;
+    }
+    await new Promise(r => setTimeout(r, intervalDuration));
+    if (gameRunning) {
+        updateScore();
+    }
+
 }
 
 // Função para reiniciar o jogo
@@ -496,7 +499,6 @@ document.getElementById('restartButton').addEventListener('click', restartGame);
 // Função para encerrar o jogo e exibir "Game Over"
 function gameOver() {
     gameRunning = false;
-    clearInterval(scoreInterval);
     document.getElementById('gameOver').style.display = 'block';
     document.getElementById('restartButton').style.display = 'block';
     document.getElementById('score').style.display = 'none';
