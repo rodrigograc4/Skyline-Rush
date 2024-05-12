@@ -440,9 +440,14 @@ async function startGame() {
 async function updateScore() {
     score += 1;
     document.getElementById('score').textContent = 'Score: ' + score;
-    if (intervalDuration > 20) { 
+    if (intervalDuration > 150) { 
         intervalDuration -= 10;
+    } else if (intervalDuration > 100) {
+        intervalDuration -= 3;
+    } else if (intervalDuration > 80) {
+        intervalDuration -= 1;
     }
+
     await new Promise(r => setTimeout(r, intervalDuration));
     if (gameRunning) {
         updateScore();
