@@ -1059,3 +1059,121 @@ function createTruck(posx, posz) {
     );
     return group;
 }
+
+// ************************** //
+// Load Lamp Post
+// ************************** //
+
+function createLampPost(posx, posz) {
+    const group = new THREE.Group();
+
+    // Instantiate a loader
+    const loader = new GLTFLoader();
+
+    // Load a glTF resource
+    loader.load(
+        // resource URL
+        'models/low_poly_psx_street_lamp/scene.gltf',
+        // called when the resource is loaded
+        function ( gltf ) {
+            gltf.scene.scale.set(25,25,25)
+            gltf.scene.rotation.y = Math.PI/2
+            gltf.scene.position.set(posx, 10, posz)
+
+            gltf.scene.traverse(function (child) {
+
+                if (child instanceof THREE.Mesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                }
+            });
+
+            group.add( gltf.scene );
+
+            // Adicionar spotlight
+            const spotLight = new THREE.SpotLight(0xffffff);
+            spotLight.position.set(posx, 100, posz - 100); 
+            spotLight.angle = Math.PI;
+            spotLight.penumbra = 0.1;
+            spotLight.intensity = 2;
+            spotLight.decay = 0.05;
+            spotLight.distance = 2000;
+            spotLight.castShadow = true;
+            spotLight.shadow.mapSize.width = 1024;
+            spotLight.shadow.mapSize.height = 1024;
+            spotLight.shadow.camera.near = 10;
+            spotLight.shadow.camera.far = 200;
+            spotLight.target.position.set(posx, 0, posz - 100);
+            spotLight.name = "lamp";
+
+            group.add(spotLight);
+
+
+        },
+        // called while loading is progressing
+        function ( xhr ) {
+            console.log( 'Lamp Post ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        },
+        // called when loading has errors
+            function ( error ) {
+        console.log( ' An error happened' +  error );
+        }
+    );
+    return group;
+}
+
+
+function createReverseLampPost(posx, posz) {
+    const group = new THREE.Group();
+
+    // Instantiate a loader
+    const loader = new GLTFLoader();
+
+    // Load a glTF resource
+    loader.load(
+        // resource URL
+        'models/low_poly_psx_street_lamp/scene.gltf',
+        // called when the resource is loaded
+        function ( gltf ) {
+            gltf.scene.scale.set(25,25,25)
+            gltf.scene.rotation.y = -Math.PI/2
+            gltf.scene.position.set(posx, 10, posz)
+
+            gltf.scene.traverse(function (child) {
+
+                if (child instanceof THREE.Mesh) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+                }
+            });
+
+            group.add( gltf.scene );
+
+            const spotLight = new THREE.SpotLight(0xffffff);
+            spotLight.position.set(posx, 100, posz + 100); 
+            spotLight.angle = Math.PI;
+            spotLight.penumbra = 0.1;
+            spotLight.intensity = 2;
+            spotLight.decay = 0.05;
+            spotLight.distance = 2000;
+            spotLight.castShadow = true;
+            spotLight.shadow.mapSize.width = 1024;
+            spotLight.shadow.mapSize.height = 1024;
+            spotLight.shadow.camera.near = 10;
+            spotLight.shadow.camera.far = 200;
+            spotLight.target.position.set(posx, 0, posz + 100);
+            spotLight.name = "lampreverse";
+
+            group.add(spotLight);
+        },
+        // called while loading is progressing
+        function ( xhr ) {
+            console.log( 'Lamp Post ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        },
+        // called when loading has errors
+            function ( error ) {
+        console.log( ' An error happened' +  error );
+        }
+    );
+    return group;
+}

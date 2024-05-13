@@ -255,16 +255,28 @@ function updateSunAndMoonPosition() {
 
     headlight_skyline_left = sceneElements.sceneGraph.getObjectByName("headlight_skyline_left");
     headlight_skyline_right = sceneElements.sceneGraph.getObjectByName("headlight_skyline_right");
+    lamp_post = sceneElements.sceneGraph.getObjectByName("lamp");
+    reverse_lamp_post = sceneElements.sceneGraph.getObjectByName("lampreverse");
 
     // Ajusta a intensidade das luzes com base na posição do sol
-    if (sunLight.position.y < 0) {
+    if (sunLight.position.y < 30) {
         sunLight.intensity = 0;
         headlight_skyline_left.intensity = 2;
         headlight_skyline_right.intensity = 2;
+        sceneElements.sceneGraph.traverse(function(object) {
+            if (object.name.includes("lamp")) {
+                object.intensity = 2;
+            }
+        });
     } else {
         sunLight.intensity = 1.5;
         headlight_skyline_left.intensity = 0;
         headlight_skyline_right.intensity = 0;
+        sceneElements.sceneGraph.traverse(function(object) {
+            if (object.name.includes("lamp")) {
+                object.intensity = 0;
+            }
+        });
     }
 }
 

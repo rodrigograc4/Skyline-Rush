@@ -192,6 +192,15 @@ function createPlane(l, w, startX) {
   const palmTree3 = createPalmTree(startX + 4000 + 2600, -1100);
   g.add(palmTree3);
 
+  // ************************** //
+  // Lamp Post
+  // ************************** //
+
+  const lampPost = createLampPost(startX + 5000, 550);
+  g.add(lampPost);
+
+  const lampPostReverse = createReverseLampPost(startX + 5000, -550);
+  g.add(lampPostReverse);
 
   // ************************** //
   // Update StartX
