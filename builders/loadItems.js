@@ -25,8 +25,8 @@ function createNissanSkyline(posx, posz) {
                 child.receiveShadow = true;
                 }
             });
-
-            group.add( gltf.scene );
+           
+            group.add(gltf.scene);
         },
         // called while loading is progressing
         function ( xhr ) {
@@ -37,9 +37,43 @@ function createNissanSkyline(posx, posz) {
         console.log( ' An error happened' +  error );
         }
     );
+    
+    // Adicionar spotlight
+    const spotLight = new THREE.SpotLight(0xffffff);
+    spotLight.position.set(posx +200, 50, posz +60); 
+    spotLight.angle = Math.PI/12;
+    spotLight.penumbra = 0.1;
+    spotLight.decay = 0.02;
+    spotLight.distance = 6000;
+    spotLight.castShadow = true;
+    spotLight.shadow.mapSize.width = 1024;
+    spotLight.shadow.mapSize.height = 1024;
+    spotLight.shadow.camera.near = 10;
+    spotLight.shadow.camera.far = 200;
+    spotLight.target.position.set(posx + 6200, 0, posz + 60);
+    spotLight.name = "headlight_skyline_right";
+
+    const spotLight2 = new THREE.SpotLight(0xffffff);
+    spotLight2.position.set(posx +200, 50, posz -60); 
+    spotLight2.angle = Math.PI/12;
+    spotLight2.penumbra = 0.1;
+    spotLight2.decay = 0.02;
+    spotLight2.distance = 6000;
+    spotLight2.castShadow = true;
+    spotLight2.shadow.mapSize.width = 1024;
+    spotLight2.shadow.mapSize.height = 1024;
+    spotLight2.shadow.camera.near = 10;
+    spotLight2.shadow.camera.far = 200;
+    spotLight2.target.position.set(posx + 6200, 0, posz - 60);
+    spotLight2.name = "headlight_skyline_left";
+
+    group.add(spotLight);
+    group.add(spotLight.target);
+    group.add(spotLight2);
+    group.add(spotLight2.target);
+
     return group;
 }
-
 
 // ************************** //
 // Load Highway Fence
@@ -451,8 +485,41 @@ function createCar(posx, posz) {
                 child.receiveShadow = true;
                 }
             });
-
             group.add( gltf.scene );
+
+            // // Adicionar spotlight
+            // const spotLight = new THREE.SpotLight(0xffffff);
+            // spotLight.position.set(posx +200, 50, posz +60); 
+            // spotLight.angle = Math.PI/11;
+            // spotLight.penumbra = 0.1;
+            // spotLight.decay = 0.05;
+            // spotLight.distance = 2000;
+            // spotLight.castShadow = true;
+            // spotLight.shadow.mapSize.width = 2048;
+            // spotLight.shadow.mapSize.height = 1024;
+            // spotLight.shadow.camera.near = 10;
+            // spotLight.shadow.camera.far = 200;
+            // spotLight.target.position.set(posx + 1000, 0, posz + 60);
+            // spotLight.name = "headlight_car_right";
+
+            // const spotLight2 = new THREE.SpotLight(0xffffff);
+            // spotLight2.position.set(posx +200, 50, posz -60); 
+            // spotLight2.angle = Math.PI/11;
+            // spotLight2.penumbra = 0.1;
+            // spotLight2.decay = 0.05;
+            // spotLight2.distance = 2000;
+            // spotLight2.castShadow = true;
+            // spotLight2.shadow.mapSize.width = 2048;
+            // spotLight2.shadow.mapSize.height = 1024;
+            // spotLight2.shadow.camera.near = 10;
+            // spotLight2.shadow.camera.far = 200;
+            // spotLight2.target.position.set(posx + 1000, 0, posz - 60);
+            // spotLight2.name = "headlight_car_left";
+
+            // group.add(spotLight);
+            // group.add(spotLight.target);
+            // group.add(spotLight2);
+            // group.add(spotLight2.target);
         },
         // called while loading is progressing
         function ( xhr ) {
@@ -463,6 +530,7 @@ function createCar(posx, posz) {
         console.log( ' An error happened' +  error );
         }
     );
+
     return group;
 }
 
@@ -492,6 +560,40 @@ function createOppositeCar(posx, posz) {
             });
 
             group.add( gltf.scene );
+
+            // // Adicionar spotlight
+            // const spotLight = new THREE.SpotLight(0xffffff);
+            // spotLight.position.set(posx -200, 50, posz +60); 
+            // spotLight.angle = Math.PI/11;
+            // spotLight.penumbra = 0.1;
+            // spotLight.decay = 0.05;
+            // spotLight.distance = 2000;
+            // spotLight.castShadow = true;
+            // spotLight.shadow.mapSize.width = 2048;
+            // spotLight.shadow.mapSize.height = 1024;
+            // spotLight.shadow.camera.near = 10;
+            // spotLight.shadow.camera.far = 200;
+            // spotLight.target.position.set(posx - 1000, 0, posz + 60);
+            // spotLight.name = "headlight_oppositecar_right";
+
+            // const spotLight2 = new THREE.SpotLight(0xffffff);
+            // spotLight2.position.set(posx -200, 50, posz -60); 
+            // spotLight2.angle = Math.PI/11;
+            // spotLight2.penumbra = 0.1;
+            // spotLight2.decay = 0.05;
+            // spotLight2.distance = 2000;
+            // spotLight2.castShadow = true;
+            // spotLight2.shadow.mapSize.width = 2048;
+            // spotLight2.shadow.mapSize.height = 1024;
+            // spotLight2.shadow.camera.near = 10;
+            // spotLight2.shadow.camera.far = 200;
+            // spotLight2.target.position.set(posx - 1000, 0, posz - 60);
+            // spotLight2.name = "headlight_oppositecar_left";
+
+            // group.add(spotLight);
+            // group.add(spotLight.target);
+            // group.add(spotLight2);
+            // group.add(spotLight2.target);
         },
         // called while loading is progressing
         function ( xhr ) {
@@ -504,87 +606,6 @@ function createOppositeCar(posx, posz) {
     );
     return group;
 }
-
-// ************************** //
-// Load Car2
-// ************************** //
-
-function createCar2(posx, posz) {
-    const group = new THREE.Group();
-
-    // Instantiate a loader
-    const loader = new GLTFLoader();
-
-    // Load a glTF resource
-    loader.load(
-        // resource URL
-        'models/cars/low_poly_car2/scene.gltf',
-        // called when the resource is loaded
-        function ( gltf ) {
-            gltf.scene.scale.set(2.3,2.3,2.3)
-            //gltf.scene.rotation.y = Math.PI
-            gltf.scene.position.set(posx, 0, posz)
-
-            gltf.scene.traverse(function (child) {
-
-                if (child instanceof THREE.Mesh) {
-                child.castShadow = true;
-                child.receiveShadow = true;
-                }
-            });
-
-            group.add( gltf.scene );
-        },
-        // called while loading is progressing
-        function ( xhr ) {
-            console.log( 'Car2 ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-        },
-        // called when loading has errors
-            function ( error ) {
-        console.log( ' An error happened' +  error );
-        }
-    );
-    return group;
-}
-
-function createOppositeCar2(posx, posz) {
-    const group = new THREE.Group();
-
-    // Instantiate a loader
-    const loader = new GLTFLoader();
-
-    // Load a glTF resource
-    loader.load(
-        // resource URL
-        'models/cars/low_poly_car2/scene.gltf',
-        // called when the resource is loaded
-        function ( gltf ) {
-            gltf.scene.scale.set(2.3,2.3,2.3)
-            gltf.scene.rotation.y = Math.PI
-            gltf.scene.position.set(posx, 0, posz)
-
-            gltf.scene.traverse(function (child) {
-
-                if (child instanceof THREE.Mesh) {
-                child.castShadow = true;
-                child.receiveShadow = true;
-                }
-            });
-
-            group.add( gltf.scene );
-        },
-        // called while loading is progressing
-        function ( xhr ) {
-            console.log( 'Car2 ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-        },
-        // called when loading has errors
-            function ( error ) {
-        console.log( ' An error happened' +  error );
-        }
-    );
-    return group;
-}
-
 
 // ************************** //
 // Load CarMercedes
@@ -615,6 +636,41 @@ function createCarMercedes(posx, posz) {
             });
 
             group.add( gltf.scene );
+
+            
+            // // Adicionar spotlight
+            // const spotLight = new THREE.SpotLight(0xffffff);
+            // spotLight.position.set(posx, 50, posz -30); 
+            // spotLight.angle = Math.PI/11;
+            // spotLight.penumbra = 0.1;
+            // spotLight.decay = 0.05;
+            // spotLight.distance = 2000;
+            // spotLight.castShadow = true;
+            // spotLight.shadow.mapSize.width = 2048;
+            // spotLight.shadow.mapSize.height = 1024;
+            // spotLight.shadow.camera.near = 10;
+            // spotLight.shadow.camera.far = 200;
+            // spotLight.target.position.set(posx + 800, 0, posz -30);
+            // spotLight.name = "headlight_carMercedes_right";
+
+            // const spotLight2 = new THREE.SpotLight(0xffffff);
+            // spotLight2.position.set(posx, 50, posz -150); 
+            // spotLight2.angle = Math.PI/11;
+            // spotLight2.penumbra = 0.1;
+            // spotLight2.decay = 0.05;
+            // spotLight2.distance = 2000;
+            // spotLight2.castShadow = true;
+            // spotLight2.shadow.mapSize.width = 2048;
+            // spotLight2.shadow.mapSize.height = 1024;
+            // spotLight2.shadow.camera.near = 10;
+            // spotLight2.shadow.camera.far = 200;
+            // spotLight2.target.position.set(posx + 800, 0, posz - 150);
+            // spotLight2.name = "headlight_carMercedes_left";
+
+            // group.add(spotLight);
+            // group.add(spotLight.target);
+            // group.add(spotLight2);
+            // group.add(spotLight2.target);
         },
         // called while loading is progressing
         function ( xhr ) {
@@ -653,6 +709,42 @@ function createOppositeCarMercedes(posx, posz) {
             });
 
             group.add( gltf.scene );
+
+            
+            
+            // // Adicionar spotlight
+            // const spotLight = new THREE.SpotLight(0xffffff);
+            // spotLight.position.set(posx, 50, posz +30); 
+            // spotLight.angle = Math.PI/11;
+            // spotLight.penumbra = 0.1;
+            // spotLight.decay = 0.05;
+            // spotLight.distance = 2000;
+            // spotLight.castShadow = true;
+            // spotLight.shadow.mapSize.width = 2048;
+            // spotLight.shadow.mapSize.height = 1024;
+            // spotLight.shadow.camera.near = 10;
+            // spotLight.shadow.camera.far = 200;
+            // spotLight.target.position.set(posx -800, 0, posz +30);
+            // spotLight.name = "headlight_oppositecarMercedes_right";
+
+            // const spotLight2 = new THREE.SpotLight(0xffffff);
+            // spotLight2.position.set(posx, 50, posz +150); 
+            // spotLight2.angle = Math.PI/11;
+            // spotLight2.penumbra = 0.1;
+            // spotLight2.decay = 0.05;
+            // spotLight2.distance = 2000;
+            // spotLight2.castShadow = true;
+            // spotLight2.shadow.mapSize.width = 2048;
+            // spotLight2.shadow.mapSize.height = 1024;
+            // spotLight2.shadow.camera.near = 10;
+            // spotLight2.shadow.camera.far = 200;
+            // spotLight2.target.position.set(posx - 800, 0, posz + 150);
+            // spotLight2.name = "headlight_oppositecarMercedes_left";
+
+            // group.add(spotLight);
+            // group.add(spotLight.target);
+            // group.add(spotLight2);
+            // group.add(spotLight2.target);
         },
         // called while loading is progressing
         function ( xhr ) {
@@ -695,6 +787,41 @@ function createSportsCar(posx, posz) {
             });
 
             group.add( gltf.scene );
+
+            
+            // // Adicionar spotlight
+            // const spotLight = new THREE.SpotLight(0xffffff);
+            // spotLight.position.set(posx +300, 50, posz +60); 
+            // spotLight.angle = Math.PI/11;
+            // spotLight.penumbra = 0.1;
+            // spotLight.decay = 0.05;
+            // spotLight.distance = 2000;
+            // spotLight.castShadow = true;
+            // spotLight.shadow.mapSize.width = 2048;
+            // spotLight.shadow.mapSize.height = 1024;
+            // spotLight.shadow.camera.near = 10;
+            // spotLight.shadow.camera.far = 200;
+            // spotLight.target.position.set(posx + 1100, 0, posz + 60);
+            // spotLight.name = "headlight_sportscar_right";
+
+            // const spotLight2 = new THREE.SpotLight(0xffffff);
+            // spotLight2.position.set(posx +300, 50, posz -60); 
+            // spotLight2.angle = Math.PI/11;
+            // spotLight2.penumbra = 0.1;
+            // spotLight2.decay = 0.05;
+            // spotLight2.distance = 2000;
+            // spotLight2.castShadow = true;
+            // spotLight2.shadow.mapSize.width = 2048;
+            // spotLight2.shadow.mapSize.height = 1024;
+            // spotLight2.shadow.camera.near = 10;
+            // spotLight2.shadow.camera.far = 200;
+            // spotLight2.target.position.set(posx + 1100, 0, posz - 60);
+            // spotLight2.name = "headlight_sportscar_left";
+
+            // group.add(spotLight);
+            // group.add(spotLight.target);
+            // group.add(spotLight2);
+            // group.add(spotLight2.target);
         },
         // called while loading is progressing
         function ( xhr ) {
@@ -734,10 +861,45 @@ function createOppositeSportsCar(posx, posz) {
             });
 
             group.add( gltf.scene );
+
+            
+            // Adicionar spotlight
+            // const spotLight = new THREE.SpotLight(0xffffff);
+            // spotLight.position.set(posx -300, 50, posz +60); 
+            // spotLight.angle = Math.PI/11;
+            // spotLight.penumbra = 0.1;
+            // spotLight.decay = 0.05;
+            // spotLight.distance = 2000;
+            // spotLight.castShadow = true;
+            // spotLight.shadow.mapSize.width = 2048;
+            // spotLight.shadow.mapSize.height = 1024;
+            // spotLight.shadow.camera.near = 10;
+            // spotLight.shadow.camera.far = 200;
+            // spotLight.target.position.set(posx - 1100, 0, posz + 60);
+            // spotLight.name = "headlight_oppositesportscar_right";
+
+            // const spotLight2 = new THREE.SpotLight(0xffffff);
+            // spotLight2.position.set(posx -300, 50, posz -60); 
+            // spotLight2.angle = Math.PI/11;
+            // spotLight2.penumbra = 0.1;
+            // spotLight2.decay = 0.05;
+            // spotLight2.distance = 2000;
+            // spotLight2.castShadow = true;
+            // spotLight2.shadow.mapSize.width = 2048;
+            // spotLight2.shadow.mapSize.height = 1024;
+            // spotLight2.shadow.camera.near = 10;
+            // spotLight2.shadow.camera.far = 200;
+            // spotLight2.target.position.set(posx - 1100, 0, posz - 60);
+            // spotLight2.name = "headlight_oppositesportscar_left";
+
+            // group.add(spotLight);
+            // group.add(spotLight.target);
+            // group.add(spotLight2);
+            // group.add(spotLight2.target);
         },
         // called while loading is progressing
         function ( xhr ) {
-            console.log( 'Sports Car ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+            console.log( 'Truck ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
         },
         // called when loading has errors
             function ( error ) {
@@ -777,10 +939,45 @@ function createOppositeTruck(posx, posz) {
             });
 
             group.add( gltf.scene );
+
+            
+            // // Adicionar spotlight
+            // const spotLight = new THREE.SpotLight(0xffffff);
+            // spotLight.position.set(posx -280, 50, posz +440); 
+            // spotLight.angle = Math.PI/11;
+            // spotLight.penumbra = 0.1;
+            // spotLight.decay = 0.05;
+            // spotLight.distance = 2000;
+            // spotLight.castShadow = true;
+            // spotLight.shadow.mapSize.width = 2048;
+            // spotLight.shadow.mapSize.height = 1024;
+            // spotLight.shadow.camera.near = 10;
+            // spotLight.shadow.camera.far = 200;
+            // spotLight.target.position.set(posx - 1080, 0, posz +440);
+            // spotLight.name = "headlight_oppositetruck_right";
+
+            // const spotLight2 = new THREE.SpotLight(0xffffff);
+            // spotLight2.position.set(posx -280, 50, posz +560); 
+            // spotLight2.angle = Math.PI/11;
+            // spotLight2.penumbra = 0.1;
+            // spotLight2.decay = 0.05;
+            // spotLight2.distance = 2000;
+            // spotLight2.castShadow = true;
+            // spotLight2.shadow.mapSize.width = 2048;
+            // spotLight2.shadow.mapSize.height = 1024;
+            // spotLight2.shadow.camera.near = 10;
+            // spotLight2.shadow.camera.far = 200;
+            // spotLight2.target.position.set(posx - 1080, 0, posz + 560);
+            // spotLight2.name = "headlight_oppositetruck_left";
+            
+            // group.add(spotLight);
+            // group.add(spotLight.target);
+            // group.add(spotLight2);
+            // group.add(spotLight2.target);
         },
         // called while loading is progressing
         function ( xhr ) {
-            console.log( 'Sports Car ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+            console.log( 'Truck ' +( xhr.loaded / xhr.total * 100 ) + '% loaded' );
         },
         // called when loading has errors
             function ( error ) {
@@ -815,6 +1012,41 @@ function createTruck(posx, posz) {
             });
 
             group.add( gltf.scene );
+
+            
+            // // Adicionar spotlight
+            // const spotLight = new THREE.SpotLight(0xffffff);
+            // spotLight.position.set(posx +280, 50, posz -440); 
+            // spotLight.angle = Math.PI/11;
+            // spotLight.penumbra = 0.1;
+            // spotLight.decay = 0.05;
+            // spotLight.distance = 2000;
+            // spotLight.castShadow = true;
+            // spotLight.shadow.mapSize.width = 2048;
+            // spotLight.shadow.mapSize.height = 1024;
+            // spotLight.shadow.camera.near = 10;
+            // spotLight.shadow.camera.far = 200;
+            // spotLight.target.position.set(posx + 1080, 0, posz -440);
+            // spotLight.name = "headlight_truck_right";
+
+            // const spotLight2 = new THREE.SpotLight(0xffffff);
+            // spotLight2.position.set(posx +280, 50, posz -560); 
+            // spotLight2.angle = Math.PI/11;
+            // spotLight2.penumbra = 0.1;
+            // spotLight2.decay = 0.05;
+            // spotLight2.distance = 2000;
+            // spotLight2.castShadow = true;
+            // spotLight2.shadow.mapSize.width = 2048;
+            // spotLight2.shadow.mapSize.height = 1024;
+            // spotLight2.shadow.camera.near = 10;
+            // spotLight2.shadow.camera.far = 200;
+            // spotLight2.target.position.set(posx + 1080, 0, posz - 560);
+            // spotLight2.name = "headlight_truck_left";
+
+            // group.add(spotLight);
+            // group.add(spotLight.target);
+            // group.add(spotLight2);
+            // group.add(spotLight2.target);
         },
         // called while loading is progressing
         function ( xhr ) {

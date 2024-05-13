@@ -49,12 +49,8 @@ const scene = {
         // Create Cars
         // ************************** //
 
-        // const truck = createOppositeTruck(1000, -870);
-        // sceneGraph.add(truck);
-        // truck.name = "truck";
-
-        // const truck2 = createTruck(1000, 620);
-        // sceneGraph.add(truck2);
+        // const testingcar = createOppositeTruck(500, -870);
+        // sceneGraph.add(testingcar);
 
     }
 };
@@ -257,10 +253,18 @@ function updateSunAndMoonPosition() {
     sunLight.position.set(2000, sunY, sunZ);
     moonLight.position.set(2000, moonY, moonZ);
 
+    headlight_skyline_left = sceneElements.sceneGraph.getObjectByName("headlight_skyline_left");
+    headlight_skyline_right = sceneElements.sceneGraph.getObjectByName("headlight_skyline_right");
+
+    // Ajusta a intensidade das luzes com base na posição do sol
     if (sunLight.position.y < 0) {
         sunLight.intensity = 0;
+        headlight_skyline_left.intensity = 2;
+        headlight_skyline_right.intensity = 2;
     } else {
         sunLight.intensity = 1.5;
+        headlight_skyline_left.intensity = 0;
+        headlight_skyline_right.intensity = 0;
     }
 }
 
@@ -295,13 +299,9 @@ function controlSkylinePosition() {
 
     var limite = 1
 
-    limite += limite + 0.05;
+    limite += limite + 0.1;
 
-    // if (limite > 80) {
-    //     limite = 80;
-    // }
-
-    var curvage = 14 + 10 * Math.log(limite);
+    var curvage = 22;
 
     if (keyShift) { 
         velocity = 22; 
@@ -316,7 +316,9 @@ function controlSkylinePosition() {
     }
     if (keyA) {
         if (skyline.position.z > -370) { // Não mova para a esquerda se já estiver no limite esquerdo
-            skyline.rotation.y = Math.max(skyline.rotation.y + 0.01, -Math.PI / 6);
+            if (skyline.rotation.y < 0.1) {
+                skyline.rotation.y = skyline.rotation.y + 0.01;
+            }
             skyline.translateZ(-curvage);
         }
         else {
@@ -328,7 +330,9 @@ function controlSkylinePosition() {
         }
     } else if (keyD) {
         if (skyline.position.z < 370) { // Não mova para a direita se já estiver no limite direito
-            skyline.rotation.y = Math.min(skyline.rotation.y - 0.01, Math.PI / 6);
+            if (skyline.rotation.y > -0.1) {
+                skyline.rotation.y = skyline.rotation.y - 0.01;
+            }
             skyline.translateZ(curvage);
         }
         else {
@@ -444,7 +448,7 @@ async function updateScore() {
         intervalDuration -= 10;
     } else if (intervalDuration > 100) {
         intervalDuration -= 3;
-    } else if (intervalDuration > 80) {
+    } else if (intervalDuration > 70) {
         intervalDuration -= 1;
     }
 
