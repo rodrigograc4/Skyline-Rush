@@ -30,7 +30,7 @@ body {
 
 #score {
 	position: absolute;
-	top: 30px;
+	top: 110px;
 	left: 120px;
 	transform: translate(-50%, -50%);
 	z-index: 9999;
@@ -83,6 +83,14 @@ body {
 	z-index: 9999;
 }
 
+#changePOV {
+	position: absolute;
+	top: 60px;
+	left: 120px;
+	transform: translate(-50%, -50%);
+	z-index: 9999;
+}
+
 .button_slide {
 color: #fff;
 background-color: #30503A;
@@ -115,6 +123,27 @@ transition: ease-out 0.4s;
 	-webkit-transition: ease-out 0.4s;
 	-moz-transition: ease-out 0.4s;
 	transition: ease-out 0.4s;
+}
+
+.button_slide3 {
+	color: #fff;
+	background-color: #134676;
+	border: 2px solid #5090b3;
+	border-radius: 0px;
+	padding: 18px 36px;
+	display: inline-block;
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 15px;
+	letter-spacing: 1px;
+	cursor: pointer;
+	box-shadow: inset 0 0 0 0 #5090b3;
+	-webkit-transition: ease-out 0.4s;
+	-moz-transition: ease-out 0.4s;
+	transition: ease-out 0.4s;
+}
+
+.slide_right2:hover {
+	box-shadow: inset 400px 0 0 0 #5090b3;
 }
 
 .slide_down:hover {

@@ -170,6 +170,43 @@ async function spawnOppositeCars(sceneGraph) {
     requestAnimationFrame(() => spawnOppositeCars(sceneGraph));
 }
 
+let firstPerson = false;
+
+function changePOV() {
+    const camera = sceneElements.camera;
+    if (camera.position.x === -2000 && camera.position.y === 1100) {
+
+        camera.position.set(-2500, 1500, 0);
+        camera.lookAt(0, 0, 0);
+
+    } else if (camera.position.x === -2500 && camera.position.y === 1500){
+        firstPerson = true;
+        
+        updateCameraPosition();
+        
+    } else {
+        firstPerson = false;
+        
+        camera.position.set(-2000, 1100, 0);
+        camera.lookAt(0, 0, 0);
+    }
+}
+
+function updateCameraPosition() {
+    if (firstPerson) {
+
+    const cameraOffset = new THREE.Vector3(0, 100, 0);
+    const car = sceneElements.sceneGraph.getObjectByName("nissanSkyline");
+    
+        // Atualiza a posição da câmera com base na posição do carro mais o offset
+        sceneElements.camera.position.copy(car.position).add(cameraOffset);
+        sceneElements.camera.lookAt(car.position.x + 10000, car.position.y, car.position.z);
+    }
+
+    // Chama a próxima atualização da posição da câmera
+    requestAnimationFrame(updateCameraPosition);
+}
+
 
 let velocityopposite = 30;
 let velocity = 10;
@@ -516,6 +553,9 @@ document.getElementById('startButton').addEventListener('click', startGame);
 
 // Event Listener para o botão de Restart
 document.getElementById('restartButton').addEventListener('click', restartGame);
+
+// Event Listener para o botão de Mudar a POV
+document.getElementById('changePOV').addEventListener('click', changePOV);
 
 // Função para encerrar o jogo e exibir "Game Over"
 function gameOver() {
