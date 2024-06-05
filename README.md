@@ -1,2 +1,2 @@
 # Skyline-Rush
-ICG - Project
+ICG - Final Project
